@@ -49,7 +49,11 @@
   	    	return;
   	    	}
   	    $("#form2").submit();
-    }      
+    } 
+      function check(obj){
+    	  if($("#user").val()=="admin")
+    		  $(obj).find("span").css("display","");
+      }
    </script>
    <style type="text/css">
    td{ text-align:center;}
@@ -81,10 +85,9 @@
                    <td>${b.recNum}</td>
                    <td>${b.arvNum}</td>
                    <td>${b.dealNum}</td>
-                   <td>
-                   <s:if test='username=="admin"'>
-                   ${b.account}
-                   </s:if>
+                   <td onclick=check(this)>
+                    <span style="display:none">${b.account}</span> 
+                   </td>
                    <td>${b.createtime}</td>
                    <td>
                        <a href="broker_delete.action?bid=${b.id}&page.pageIndex=${page.pageIndex}" target="right"><input type="button" name="button" class="btn btn82 btn_del" value="删除"></a>
@@ -116,6 +119,7 @@
 					</ul>			
 				</div>
 			</div>
+			<input type="hidden" name="user" id="user" value="${username}">
 			</form>
         </div>
      </div>

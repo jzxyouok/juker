@@ -15,20 +15,29 @@ import cn.juke.util.Page;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-public class CustomerAction extends BaseAction implements ModelDriven<Customer>  {
+public class CustomerAction extends BaseAction implements ModelDriven<Customer> {
 
 	private CustomerService hs = new CustomerServiceImpl();
-	private DealService ds=new DealServiceImpl();
-	private Set<Integer> scustomers=new HashSet<Integer>();
+	private DealService ds = new DealServiceImpl();
+	private Set<Integer> scustomers = new HashSet<Integer>();
 	private List<Customer> customers;
 	private Customer customer;
-	private Integer cstatus;	
+	private Integer cstatus;
 	private Long hid;
 	private int to_status;
 	private int operate;
 	private Page page;
-	private String t_status;//批量操作时隐藏的参数
-	
+	private String t_status;// 批量操作时隐藏的参数
+	private String der;
+
+	public String getDer() {
+		return der;
+	}
+
+	public void setDer(String der) {
+		this.der = der;
+	}
+
 	public Set<Integer> getScustomers() {
 		return scustomers;
 	}
@@ -45,7 +54,6 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 		this.t_status = t_status;
 	}
 
-	
 	public Integer getCstatus() {
 		return cstatus;
 	}
@@ -78,75 +86,83 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 		this.hid = hid;
 	}
 
-
 	public void setCustomers(List<Customer> customers) {
 		this.customers = customers;
 	}
 
 	public String list() {
-		int s=cstatus==null?-1:cstatus;
-		Long comid=(Long)getSession().get("comid");
-		String username=(String)getSession().get("username");
-		if(page==null){
-			page=new Page();
+		int s = cstatus == null ? -1 : cstatus;
+		Long comid = (Long) getSession().get("comid");
+		String username = (String) getSession().get("username");
+		if (page == null) {
+			page = new Page();
 			page.setPageIndex(1);
 		}
-		if("admin".equals(username)){
-		customers = hs.search(page,s);
+		if ("admin".equals(username)) {
+			customers = hs.search(page, s);
+		} else {
+			 if (s < 2)
+				customers = hs.search(page, s);
+			else
+				customers = hs.search(page,username,s);
 		}
-		else customers = hs.search(page,s,comid);
 		return SUCCESS;
 	}
 
 	public String stats() {
 		Deal dDeal = ds.getDeal(hid);
-		cstatus=dDeal.getStatus();
-		System.out.println("hid=="+hid+" dDeal=="+dDeal);
+		cstatus = dDeal.getStatus();
+		System.out.println("hid==" + hid + " dDeal==" + dDeal);
+		if (to_status == 2)
+			dDeal.setDealer(der);
+		else if (to_status == 1)
+			dDeal.setDealer(null);
 		dDeal.setStatus(to_status);
 		ds.update(dDeal);
-		customers=hs.search(page, cstatus,getComid());
-		
-		Long comid=(Long)getSession().get("comid");
-		String username=(String)getSession().get("username");
-		if(page==null){
-			page=new Page();
+		customers = hs.search(page, cstatus, getComid());
+
+		Long comid = (Long) getSession().get("comid");
+		String username = (String) getSession().get("username");
+		if (page == null) {
+			page = new Page();
 			page.setPageIndex(1);
 		}
-		if("admin".equals(username)){
-		customers = hs.search(page,cstatus);
-		}
-		else customers = hs.search(page,cstatus,comid);
+		if ("admin".equals(username)) {
+			customers = hs.search(page, cstatus);
+		} else
+			customers = hs.search(page, cstatus, comid);
 		return SUCCESS;
-		
+
 	}
-	
+
 	public List<Customer> getCustomers() {
 		return customers;
 	}
 
-
 	public String update() throws Exception {
-		Iterator<Integer> ii=scustomers.iterator();
-		to_status=Integer.parseInt(t_status);
-		while(ii.hasNext()){
-			int i=ii.next();
-			Deal dd=ds.getDeal(new Long(i));
+		Iterator<Integer> ii = scustomers.iterator();
+		to_status = Integer.parseInt(t_status);
+		while (ii.hasNext()) {
+			int i = ii.next();
+			Deal dd = ds.getDeal(new Long(i));
 			System.out.println(dd);
-			cstatus=dd.getStatus();
+			cstatus = dd.getStatus();
 			dd.setStatus(to_status);
-			ds.update(dd);		
+			if (to_status == 1)
+				dd.setDealer(null);
+			ds.update(dd);
 		}
-		Long comid=(Long)getSession().get("comid");
-		String username=(String)getSession().get("username");
-		if(page==null){
-			page=new Page();
+		Long comid = (Long) getSession().get("comid");
+		String username = (String) getSession().get("username");
+		if (page == null) {
+			page = new Page();
 			page.setPageIndex(1);
 		}
-		if("admin".equals(username)){
-		customers = hs.search(page,cstatus);
-		}
-		else customers = hs.search(page,cstatus,comid);
-		return SUCCESS;	
+		if ("admin".equals(username)) {
+			customers = hs.search(page, cstatus);
+		} else
+			customers = hs.search(page, cstatus, comid);
+		return SUCCESS;
 	}
 
 	public int getTo_status() {
@@ -156,12 +172,13 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 	public void setTo_status(int to_status) {
 		this.to_status = to_status;
 	}
-	
-	public String byName(){
+
+	public String byName() {
 		String name;
-		try{
-		name= new String((customer.getName()).getBytes("ISO-8859-1"),"UTF-8"); 
-		}catch(Exception e){
+		try {
+			name = new String((customer.getName()).getBytes("ISO-8859-1"),
+					"UTF-8");
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		customer.setName(name);
@@ -170,7 +187,7 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 		Long comid = (Long) getSession().get("comid");
 		String username = (String) getSession().get("username");
 		page.setPageIndex(1);
-		if("admin".equals(username)) {
+		if ("admin".equals(username)) {
 			customers = hs.search(name, page);
 		} else
 			customers = hs.search(name, page, comid);
@@ -179,8 +196,8 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 
 	@Override
 	public Customer getModel() {
-		if(customer==null)
-			customer=new Customer();
+		if (customer == null)
+			customer = new Customer();
 		return customer;
 	}
 }

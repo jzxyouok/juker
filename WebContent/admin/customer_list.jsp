@@ -65,6 +65,13 @@
     	    $("#t_status").val(arg);
     	    $("#form2").submit();
       }
+      
+      function check(obj){
+    	  var der=$(obj).parent().parent().children("td").eq(8).find("input").attr("value");  
+    	  var hid=$(obj).parent().parent().children("td").eq(0).find("input").attr("value"); 
+          var url="customer_stats.action?hid="+hid+"&to_status=2&page.pageIndex="+$("#page").val()+"&der="+der;
+          window.location.href=url;
+      }
    </script>
    <style type="text/css">
    td{ text-align:center;}
@@ -99,18 +106,18 @@
 					<td>${h.weixin}</td>
 					<td>${h.statusName}</td>
 					<td>${h.dealtime}</td>
-					<td>${h.dealer}</td>
+					<td><input style="width:111px;height:30px" value="${h.dealer}"/></td>
 					<td>
 					<s:if test="cstatus==0">
 					<a href="customer_stats.action?hid=${h.id}&to_status=1&page.pageIndex=${page.pageIndex}" target="right"><input
 							type="button" name="button" class="btn btn82 btn_add" value="转无效"></a>
 						&nbsp;&nbsp;
-					<a href="customer_stats.action?hid=${h.id}&to_status=2&page.pageIndex=${page.pageIndex}" target="right"> <input type="button" name="button"
-						class="btn btn82 btn_add" value="转意向"></a>
+					 <input type="button" name="button"
+						class="btn btn82 btn_add" onclick="check(this)" value="转意向">
 					</s:if>	
 					<s:elseif test="cstatus==1">
-						<a href="customer_stats.action?hid=${h.id}&to_status=2&page.pageIndex=${page.pageIndex}" target="right"> <input type="button" name="button"
-						class="btn btn82 btn_add" value="转意向"></a>
+						 <input type="button" name="button"
+						class="btn btn82 btn_add" onclick="check(this)" value="转意向">
 					</s:elseif>
 					<s:elseif test="cstatus==2">
 						<a href="customer_stats.action?hid=${h.id}&to_status=1&page.pageIndex=${page.pageIndex}" target="right"><input
@@ -197,6 +204,7 @@
 				</div>
 			</div>
               </form>
+              <input type=hidden name="page" id="page" value="${page.pageIndex}">
              <div class="page mt10">
 				<div class="pagination">
 					<ul>

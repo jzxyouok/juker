@@ -16,4 +16,8 @@ public interface CustomerDao extends GenericDao<Customer>
 	 public  List<Customer> search(Page page, int status);
 	 
 	 public  List<Customer> search(Page page);
+	 
+	 public  List<Customer> search(Page page,String dealer);
+	 
+	 public  List<Customer> search(Page page,String dealer,int status);
 }

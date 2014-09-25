@@ -31,7 +31,6 @@ public class TestDB {
 			h.setBtype("清水房");
 			h.setCity("北京");
 			h.setName(hnames[rand.nextInt(3)]);
-			h.setComid("01");
 			h.setDescr("好地方");
 			h.setDeveloper(dnames[rand.nextInt(3)]);
 			h.setDiscount("昌平");
@@ -91,10 +90,7 @@ public class TestDB {
 
 	public static void testRoles() {
 		RoleService hs = new RoleServiceImpl();
-		for (int i = 0; i < 5; i++) {
-			Role role = new Role(new Long(i), "name" + i, "01", "desc" + i);
-			hs.create(role);
-		}
+		
 	}
 
 	public static void main(String[] a) {

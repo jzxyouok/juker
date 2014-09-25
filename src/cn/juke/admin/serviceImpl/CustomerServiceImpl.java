@@ -55,4 +55,12 @@ public class CustomerServiceImpl implements CustomerService {
 	{
 		return hd.search(page);
 	}
+	
+	public  List<Customer> search(Page page,String dealer){
+		return hd.search(page, dealer);
+	}
+	 
+	public  List<Customer> search(Page page,String dealer,int status){
+		return hd.search(page, dealer, status);
+	}
 }
