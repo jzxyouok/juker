@@ -18,5 +18,7 @@ public interface CompanyService {
 	public List<Company> search(Page page);
 
 	public List<Company> search();
+	
+	public List<Company> search(String name);
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,8 +23,7 @@ public class User implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", name=" + name
-				+ ", createTime=" + createTime + "]";
+		return "User [id=" + id + ", username=" + username + ", name=" +name+"]";
 	}
 
 	// Fields
@@ -31,7 +31,62 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String name;
 	private String state;
-	private String comid;
+	private Company company;
+	private String password;
+	private String create_time;
+	private String modifyt_time;
+	private String phone;
+	private String qq;
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCreate_time() {
+		return create_time;
+	}
+
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+
+	public String getModifyt_time() {
+		return modifyt_time;
+	}
+
+	public void setModifyt_time(String modifyt_time) {
+		this.modifyt_time = modifyt_time;
+	}
+
+	@ManyToOne
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
 
 	private Set<Role> roles = new HashSet<Role>();
 
@@ -53,31 +108,10 @@ public class User implements java.io.Serializable {
 		this.state = state;
 	}
 
-	public String getComid() {
-		return comid;
-	}
-
-	public void setComid(String comid) {
-		this.comid = comid;
-	}
-
-	private String password;
-	private String createTime;
-	private String modifyTime;
-
 	// Constructors
 
 	/** default constructor */
 	public User() {
-	}
-
-	/** full constructor */
-	public User(String roleid, String username, String password,
-			String createTime, String modifyTime) {
-		this.username = username;
-		this.password = password;
-		this.createTime = createTime;
-		this.modifyTime = modifyTime;
 	}
 
 	// Property accessors
@@ -108,24 +142,6 @@ public class User implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Column(name = "create_time", length = 30)
-	public String getCreateTime() {
-		return this.createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
-	@Column(name = "modify_time", length = 30)
-	public String getModifyTime() {
-		return this.modifyTime;
-	}
-
-	public void setModifyTime(String modifyTime) {
-		this.modifyTime = modifyTime;
 	}
 
 	@Column(name = "name", length = 30)

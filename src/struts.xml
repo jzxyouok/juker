@@ -135,6 +135,19 @@
 		 <action name="brokers_update" class="cn.juke.admin.action.BrokerAction" method="edits">
 			<result name="success">/admin/broker_list.jsp</result>
 		</action>
+		
+		<action name="useradd" class="cn.juke.admin.action.UserAction" method="add">
+			<result name="success">/admin/user_add.jsp</result>
+			<result name="input">/admin/user_add.jsp</result>
+		</action>
+		
+		<action name="companyadd" class="cn.juke.admin.action.CompanyAction" method="add">
+			<result name="success">/admin/company_add.jsp</result>
+			<result name="input">/admin/company_add.jsp</result>
+		</action>
+		<action name="companyget" class="cn.juke.admin.action.CompanyAction" method="get">
+			<result name="success" type="json"></result>
+		</action>
 	</package>
 
 	<package name="p2" extends="struts-default">

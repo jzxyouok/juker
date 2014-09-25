@@ -86,8 +86,8 @@ public class SignupAction extends BaseAction implements ModelDriven<User> {
 			String passwd = MD5.getMD5Str(user.getPassword());
 			user.setPassword(passwd);
 			user.setState("0");
-			user.setModifyTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
-			user.setCreateTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+			user.setModifyt_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+			user.setCreate_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 			us.create(user);
 		    Map<String,Object> session=this.getSession();
 	        //session.put("username",user.getUsername());	

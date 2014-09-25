@@ -74,22 +74,26 @@ td {
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"
 				class="list_table">
 				<tr>
-					<th width="60"><input type="checkbox" name="all" id="all" />选择</th>
-					<th>用户名</th>
-					<th>姓名</th>
-					<th width="130">公司</th>
-					<th width="200">状态</th>
-					<th width="200">注册日期</th>
-					<th>操作</th>
+					<th width="20"><input type="checkbox" name="all" id="all" />选择</th>
+					<th width="40">用户名</th>
+					<th width="40">姓名</th>
+					<th width="50">公司</th>
+					<th width="30">状态</th>
+					<th width="60">电话</th>
+					<th width="60">QQ</th>
+					<th width="80">注册日期</th>
+					<th width="120">操作</th>
 				</tr>
 				<s:iterator value="users" id="h">
 				<tr class="tr">
 	                <td class="td_center" ><input type="checkbox"  name="susers" id="susers" value="${h.id}"></td>
 					<td>${h.username}</td>
 					<td>${h.name}</td>
-					<td>${h.comid}</td>
-					<td>${h.state}</td>
-					<td>${h.createTime}</td>
+					<td>${h.company.name}</td>
+					<td><s:if test='#h.state=="0"'>冻结</s:if><s:elseif test='#h.state=="1"'>正常</s:elseif></td>
+					<td>${h.phone}</td>
+					<td>${h.qq}</td>
+					<td>${h.create_time}</td>
 					<td>
 					<s:if test='#h.state=="0"'><a href="user_edit.action?hid=${h.id}&operate=1" target="right"><input
 							type="button" name="button" class="btn btn82 btn_add" value="激活"></a></s:if>
@@ -111,6 +115,10 @@ td {
 						<li>&nbsp;&nbsp;</li>
 						<li><input type="button" onClick="transfer(this.value)"
 							class="btn btn82 btn_del" value="冻结"></li>
+						<li>&nbsp;&nbsp;</li>
+						<li><input type="button" onClick="window.location.href='user_add.jsp'"
+							class="btn btn82 btn_del" value="新建"></li>	
+					 
 					</ul>
 				</div>
 

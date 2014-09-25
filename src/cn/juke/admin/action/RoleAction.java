@@ -107,7 +107,8 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 
 	public String list() {
 		String username = (String) getSession().get("username");
-		Long comid=(Long)getSession().get("comid");
+		System.out.println(getSession().get("comid"));
+		Long comid = (Long) getSession().get("comid");
 		if (page == null) {
 			page = new Page();
 			page.setPageIndex(1);
@@ -116,13 +117,13 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 			roles = rs.search(page);
 		else
 			roles = rs.search(page, comid);
-		
+
 		System.out.println(roles);
 		return "success";
 	}
 
 	public String update() {
-		Long comid=(Long)getSession().get("comid");
+		Long comid = (Long) getSession().get("comid");
 		role = rs.getRole(rid);
 		Set<TreeNode> nodes = new LinkedHashSet<TreeNode>();
 		Iterator<Integer> t = selectedNodes.iterator();
@@ -157,6 +158,13 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 		User u = us.search(username);
 		if ("admin".equals(u.getUsername())) {
 			allNodes = new LinkedHashSet<TreeNode>(tns.search());
+			Iterator<TreeNode> ii = allNodes.iterator();
+			while (ii.hasNext()) {
+				TreeNode i=ii.next();
+				System.out.println(i);
+				if (i.getId()==1||i.getParent().getId() == 1)
+					ii.remove();
+			}
 		}
 		// 如果是管理员，获得所有菜单，否则只能分配自己有的菜单
 		else {
@@ -179,11 +187,12 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 
 	public String add() {
 		String username = (String) getSession().get("username");
-		Long comid=(Long)getSession().get("comid");
+		Long comid = (Long) getSession().get("comid");
 		if (!comid.equals(role.getComid()) && !username.equals("admin")) {
 			role.setComid(comid);
 		}
-		role.setCreate_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+		role.setCreate_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+				.format(new Date()));
 		rs.create(role);
 
 		if (page == null) {

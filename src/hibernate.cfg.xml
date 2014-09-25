@@ -28,5 +28,6 @@
 		<mapping class="cn.juke.bean.User" />
 		<mapping class="cn.juke.bean.TreeNode" />
 		<mapping class="cn.juke.bean.Role" />
+		<mapping class="cn.juke.bean.Company" />
 	</session-factory>
 </hibernate-configuration>

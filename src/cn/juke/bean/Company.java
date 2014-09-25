@@ -3,13 +3,24 @@ package cn.juke.bean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="company",catalog="juker")
 public class Company {
 	private Long id;
 	private String name;
 	private String phone;
 	private String address;
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Id
 	@GeneratedValue

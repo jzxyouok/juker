@@ -10,4 +10,6 @@ public interface CompanyDao extends GenericDao<Company> {
 	public List<Company> search(Page page);
     
 	public List<Company> search();
+	
+	public List<Company> search(String name);
 }

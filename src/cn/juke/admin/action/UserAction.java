@@ -1,6 +1,8 @@
 package cn.juke.admin.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -8,12 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cn.juke.admin.service.CompanyService;
 import cn.juke.admin.service.RoleService;
 import cn.juke.admin.service.TreeNodeService;
 import cn.juke.admin.service.UserService;
+import cn.juke.admin.serviceImpl.CompanyServiceImpl;
 import cn.juke.admin.serviceImpl.RoleServiceImpl;
 import cn.juke.admin.serviceImpl.TreeNodeServiceImpl;
 import cn.juke.admin.serviceImpl.UserServiceImpl;
+import cn.juke.bean.Company;
 import cn.juke.bean.Role;
 import cn.juke.bean.TreeNode;
 import cn.juke.bean.User;
@@ -33,6 +38,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	private Set<Role> allRoles=new HashSet<Role>();
     private List<Integer> selectedRoles=new ArrayList<Integer>();
     private Set<Integer> susers=new HashSet<Integer>();
+    private CompanyService cs=new CompanyServiceImpl();
     
 	public Set<Integer> getSusers() {
 		return susers;
@@ -130,7 +136,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
            
             User u=hs.search(user.getUsername());
             session.put("userid",u.getId());
-            session.put("comid",u.getComid());
+            session.put("comid",u.getCompany().getId());
            
             if("admin".equals(u.getUsername())){
             	root=tns.get(new Long(1));
@@ -199,22 +205,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		return SUCCESS;
 	}
 	
-	public void validateAdd(){
-		if(user.getUsername()==null||"".equals(user.getUsername().trim())){
-			this.addFieldError("username","用户名不能为空！");
-		}
-		else if(hs.search(user.getUsername())!=null){
-			this.addFieldError("username","用户名已存在！");
-		}
-		if(user.getPassword()==null||"".equals(user.getPassword().trim())){
-			this.addFieldError("password","密码不能为空！");
-		}
-		
-		if(user.getName()==null||"".equals(user.getName().trim())){
-			this.addFieldError("name","姓名不能为空！");
-		}	
-	}
-	
 	public void validateLogin(){
 		
 		String passwd=null;
@@ -236,15 +226,27 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	public String add(){
 		String passwd=MD5.getMD5Str(user.getPassword());
 		user.setPassword(passwd);
+		Long comid=(Long)getSession().get("comid");
+		if(comid==1){
+			addFieldError("user","系统管理员不能创建用户");
+			return INPUT;
+		}
+		Company c=cs.get(comid);
+		user.setCompany(c);
+		user.setState("1");
+		user.setModifyt_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+		user.setCreate_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 		hs.create(user);
 		return SUCCESS;
 	}
 	
 	
 	public String list(){
+		
 		Long comid=(Long)getSession().get("comid");
 		String username=(String)getSession().get("username");
 		User u=hs.search(username);
+		System.out.println("user_list"+u+" comid "+comid);
 		if(page==null){
 			page=new Page();
 			page.setPageIndex(1);

@@ -28,8 +28,8 @@ public class UserDaoImpl extends GenericHibernateDao<User> implements UserDao {
 	}
 
 	public List<User> search(Page page, Long comid) {
-		return queryForList("select count(*) from User u where u.comid = ?",
-				"from User u where u.comid = ?", new Object[] { comid }, page);
+		return queryForList("select count(*) from User u where u.company.id = ?",
+				"from User u where u.company.id = ?", new Object[] { comid }, page);
 	}
 
 }

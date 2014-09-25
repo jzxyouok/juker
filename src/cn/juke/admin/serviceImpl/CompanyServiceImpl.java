@@ -39,4 +39,8 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<Company> search() {
 		return dd.search();
 	}
+
+	public List<Company> search(String name) {
+		return dd.search(name);
+	}
 }

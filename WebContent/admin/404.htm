@@ -335,7 +335,7 @@
     <div class="music-main-body">
       <div class="music-body clearfix">
         
-	<div class="state-404 c9"><strong id="countDown">10</strong> 秒后返回 <a href="login.jsp">首页</a> 	 ...</div>
+	<div class="state-404 c9"><strong id="countDown">10</strong> 秒后返回 <a href="login.jsp" target="_parent">首页</a> 	 ...</div>
 
       </div>
     </div>
@@ -352,7 +352,7 @@
 				setTimeout(function () {
                     countDown.innerHTML = --t;
                     if (t == 0) {
-                        window.location.href = "login.jsp"; 
+                        window.parent.location.href = "login.jsp"; 
                     }
                 }, 1000 * i);
 			};

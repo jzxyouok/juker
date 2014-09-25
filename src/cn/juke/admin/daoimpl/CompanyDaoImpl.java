@@ -21,4 +21,8 @@ public class CompanyDaoImpl extends GenericHibernateDao<Company> implements
 	public List<Company> search() {
 		return queryForList("from Company");
 	}
+	
+	public List<Company> search(String name){
+		return queryForList("from Company c where c.name = ?",new Object[]{name});
+	}
 }

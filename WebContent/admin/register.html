@@ -5,72 +5,166 @@
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="0">
 <title>用户注册</title>
-<script src="js/jquery-formValidator/jquery-1.4.4.js" type="text/javascript"></script>
-<link type="text/css" rel="stylesheet" href="js/jquery-formValidator/style/validator.css"></link>
-<script src="js/jquery-formValidator/formValidator-4.0.1.js" type="text/javascript"
-	charset="UTF-8"></script>
-<script src="js/jquery-formValidator/formValidatorRegex.js" type="text/javascript"
-	charset="UTF-8"></script>
-<script type="javascript/text" src="js/jquery-formValidator/DateTimeMask.js"
+<script src="js/jquery-formValidator/jquery-1.4.4.js"
 	type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.2.4/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.2.4/themes/icon.css">
-	
-<script type="text/javascript" src="js/jquery-easyui-1.2.4/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/jquery-formValidator/jquery.md5.js" ></script>
-<script type="text/javascript" src="js/jquery-easyui-1.2.4/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$.formValidator.initConfig({formID:"form1",debug:false,submitOnce:true,
-		submitAfterAjaxPrompt : '有数据正在异步验证，请稍等...'
-	});
-	$("#username").formValidator({onShow:"请输入用户名",onFocus:"用户名至少6个字符,最多10个字符",onCorrect:"该用户名可以注册"}).inputValidator({min:6,max:10,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"你输入的用户名非法,请确认"})//.regexValidator({regExp:"username",dataType:"enum",onError:"用户名格式不正确"})
-	    .ajaxValidator({
-		dataType : "json",
-		async : true,
-		url : "abc.action",
-		data:{'username':$('#username').val(),'type':'2'},
-		success : function(data){
-		var state=eval("("+data.result+")"); 
-            if( state.result=="ok" ) 
-                return true;
-			return false;
-		},
-		buttons: $("#button"),
-		error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
-		onError : "该用户名不可用，请更换用户名",
-		onWait : "正在对用户名进行合法性校验，请稍候..."
-	});
-	
-	$("#authCode").formValidator({onShow:"请输入验证码",onCorrect:"输入正确"})//.inputValidator({min:6,max:10,empty:{leftEmpty:false,rightEmpty:false,emptyError:"验证码不能为空"},onError:"输入正确 "})
-    .ajaxValidator({
-	dataType : "json",
-	async : true,
-	url : "abc.action",
-	data:{'authCode':$('#authCode').val(),'type':'1'},
-	success : function(data){
-	var state=eval("("+data.result+")"); 
-        if( state.result=="ok" ) 
-            return true;
-		return false;
-	},
-	buttons: $("#button"),
-	error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
-	onError : "验证码错误,請點擊圖片重新刷新",
-	onWait : "正在对验证码进行合法性校验，请稍候..."
-});
-	$("#name").formValidator({onShow:"请输入真實姓名",onFocus:"至少6个长度",onCorrect:"姓名合法"}).inputValidator({min:4,empty:{leftEmpty:false,rightEmpty:false,emptyError:"姓名两边不能有空符号"},onError:"姓名不合法,请确认"});
-	$("#password").formValidator({onShow:"请输入密码",onFocus:"至少6个长度",onCorrect:"密码合法"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"密码不能为空,请确认"});
-	$("#password2").formValidator({onShow:"输再次输入密码",onFocus:"至少6个长度",onCorrect:"密码一致"}).inputValidator({min:1,empty:{leftEmpty:false,rightEmpty:false,emptyError:"重复密码两边不能有空符号"},onError:"重复密码不能为空,请确认"}).compareValidator({desID:"password",operateor:"=",onError:"2次密码不一致,请确认"});
-	$("#comId").formValidator({onShow:"请选择你的所在公司",onFocus:"公司必须选择",onCorrect:"谢谢你的配合",defaultValue:""}).inputValidator({min:1,onError: "你是不是忘记選擇角色了!"});
-});
+<link type="text/css" rel="stylesheet"
+	href="js/jquery-formValidator/style/validator.css"></link>
+<script src="js/jquery-formValidator/formValidator-4.0.1.js"
+	type="text/javascript" charset="UTF-8"></script>
+<script src="js/jquery-formValidator/formValidatorRegex.js"
+	type="text/javascript" charset="UTF-8"></script>
+<script type="javascript/text"
+	src="js/jquery-formValidator/DateTimeMask.js" type="text/javascript"></script>
+<script type="text/javascript"
+	src="js/jquery-formValidator/jquery.md5.js"></script>
 
-window.onload=function(){
-    var verifyObj = document.getElementById("Verify");
-    verifyObj.onclick=function(){
-        this.src="authCodeAction?timestamp="+new Date().getTime();
-    };
-}
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$.formValidator.initConfig({
+					formID : "form1",
+					debug : false,
+					submitOnce : true,
+					submitAfterAjaxPrompt : '有数据正在异步验证，请稍等...'
+				});
+				$("#username").formValidator({
+					onShow : "请输入用户名",
+					onFocus : "用户名至少6个字符,最多10个字符",
+					onCorrect : "该用户名可以注册"
+				}).inputValidator({
+					min : 6,
+					max : 10,
+					empty : {
+						leftEmpty : false,
+						rightEmpty : false,
+						emptyError : "密码两边不能有空符号"
+					},
+					onError : "你输入的用户名非法,请确认"
+				})//.regexValidator({regExp:"username",dataType:"enum",onError:"用户名格式不正确"})
+				.ajaxValidator({
+					dataType : "json",
+					async : true,
+					url : "abc.action",
+					data : {
+						'username' : $('#username').val(),
+						'type' : '2'
+					},
+					success : function(data) {
+						var state = eval("(" + data.result + ")");
+						if (state.result == "ok")
+							return true;
+						return false;
+					},
+					buttons : $("#button"),
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("服务器没有返回数据，可能服务器忙，请重试" + errorThrown);
+					},
+					onError : "该用户名不可用，请更换用户名",
+					onWait : "正在对用户名进行合法性校验，请稍候..."
+				});
+
+				$("#authCode").formValidator({
+					onShow : "请输入验证码",
+					onCorrect : "输入正确"
+				})//.inputValidator({min:6,max:10,empty:{leftEmpty:false,rightEmpty:false,emptyError:"验证码不能为空"},onError:"输入正确 "})
+				.ajaxValidator({
+					dataType : "json",
+					async : true,
+					url : "abc.action",
+					data : {
+						'authCode' : $('#authCode').val(),
+						'type' : '1'
+					},
+					success : function(data) {
+						var state = eval("(" + data.result + ")");
+						if (state.result == "ok")
+							return true;
+						return false;
+					},
+					buttons : $("#button"),
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("服务器没有返回数据，可能服务器忙，请重试" + errorThrown);
+					},
+					onError : "验证码错误,請點擊圖片重新刷新",
+					onWait : "正在对验证码进行合法性校验，请稍候..."
+				});
+				$("#name").formValidator({
+					onShow : "请输入真實姓名",
+					onFocus : "至少6个长度",
+					onCorrect : "姓名合法"
+				}).inputValidator({
+					min : 4,
+					empty : {
+						leftEmpty : false,
+						rightEmpty : false,
+						emptyError : "姓名两边不能有空符号"
+					},
+					onError : "姓名不合法,请确认"
+				});
+				$("#password").formValidator({
+					onShow : "请输入密码",
+					onFocus : "至少6个长度",
+					onCorrect : "密码合法"
+				}).inputValidator({
+					min : 6,
+					empty : {
+						leftEmpty : false,
+						rightEmpty : false,
+						emptyError : "密码两边不能有空符号"
+					},
+					onError : "密码不能为空,请确认"
+				});
+				$("#password2").formValidator({
+					onShow : "输再次输入密码",
+					onFocus : "至少6个长度",
+					onCorrect : "密码一致"
+				}).inputValidator({
+					min : 1,
+					empty : {
+						leftEmpty : false,
+						rightEmpty : false,
+						emptyError : "重复密码两边不能有空符号"
+					},
+					onError : "重复密码不能为空,请确认"
+				}).compareValidator({
+					desID : "password",
+					operateor : "=",
+					onError : "2次密码不一致,请确认"
+				});
+				$("#comId").formValidator({
+					onShow : "请选择你的所在公司",
+					onFocus : "公司必须选择",
+					onCorrect : "谢谢你的配合",
+					defaultValue : ""
+				}).inputValidator({
+					min : 1,
+					onError : "公司必须选择"
+				});
+				$.ajax({
+					type : "GET",
+					contentType : "application/json",
+					url : "companyget",
+					data : "{}",
+					dataType : 'json',
+					success : function(result) {
+						var data = eval(result.coms);
+						var select = $("#comId");
+						$.each(data, function(index, obj) {
+							$(
+									"<option value=" + obj.id + ">" + obj.name
+											+ "</option>").appendTo(select);
+						});
+					}
+				});
+
+			});
+
+	window.onload = function() {
+		var verifyObj = document.getElementById("Verify");
+		verifyObj.onclick = function() {
+			this.src = "authCodeAction?timestamp=" + new Date().getTime();
+		};
+	}
 </script>
 <style type="text/css" media="all">
 body,div {
@@ -80,55 +174,75 @@ body,div {
 </head>
 
 <body>
-<h3>用户注册</h3>
-<form action="abc.action" method="post" name="form1" id="form1" autocomplete="off">
-<table border="0px" style="font-size: 12px" width="630px">
-	<tr>
-		<td align="right">用户名:</td>
-		<td><input id="username" name="username" style="width: 120px" /></td>
-		<td>
-		<div id="usernameTip" style="width: 250px"></div>
-		</td>
-	</tr>
-	<tr>
-		<td align="right">密码:</td>
-		<td><input type="password" name="password" id="password" style="width: 120px" /></td>
-		<td>
-		<div id="passwordTip" style="width: 250px"></div>
-		</td>
-	</tr>
-	<tr>
-		<td align="right">重复密码:</td>
-		<td><input type="password" id="password2" style="width: 120px" /></td>
-		<td>
-		<div id="password2Tip" style="width: 250px"></div>
-		</td>
-	</tr>
-	<tr>
-		<td align="right">姓名:</td>
-		<td><input type="text" id="name" name="name" style="width: 120px" /></td>
-		<td>
-		<div id="nameTip" style="width: 250px"></div>
-		</td>
-	</tr>
-	<tr>
-		<td align="right">所在公司:</td>
-		<td><select name="comid" id="comId">
-			<option value="">请选择你的公司</option>
-			<option value="01">恒大</option>
-			<option value="02">万达</option>
-		</select></td>
-		<td>
-		<div id="comIdTip" style="width: 250px"></div>
-		</td>
-	</tr>
-</table>
- 		<img src="authCodeAction" id="Verify"  style="cursor:hand;" alt="看不清，换一张"/>
-     
-		验证码：<input id="authCode" name="authCode">
-		
-		<div id="authCodeTip" style="width: 250px"></div>
-		
-<input type="submit" name="button" id="button" value="注册" /></form>
+	<h3>用户注册</h3>
+	<form action="abc.action" method="post" name="form1" id="form1"
+		autocomplete="off">
+		<table border="0px" style="font-size: 15px" width="630px">
+			<tr>
+				<td align="right">用户名:</td>
+				<td><input id="username" name="username" style="width: 120px" /></td>
+				<td>
+					<div id="usernameTip" style="width: 250px"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">密码:</td>
+				<td><input type="password" name="password" id="password"
+					style="width: 120px" /></td>
+				<td>
+					<div id="passwordTip" style="width: 250px"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">重复密码:</td>
+				<td><input type="password" id="password2" style="width: 120px" /></td>
+				<td>
+					<div id="password2Tip" style="width: 250px"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">姓名:</td>
+				<td><input type="text" id="name" name="name"
+					style="width: 120px" /></td>
+				<td>
+					<div id="nameTip" style="width: 250px"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">公司:</td>
+				<td><select name="comId" id="comId">
+						<option value="">请选择你的公司</option>
+				</select></td>
+				<td>
+					<div id="comIdTip" style="width: 250px"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">郵箱:</td>
+				<td><input name="email" id="email" style="width: 120px" /></td>
+			</tr>
+			<tr>
+				<td align="right">QQ:</td>
+				<td><input type="password" name="password" id="password"
+					style="width: 120px" /></td>
+			</tr>
+			<tr>
+				<td colspan="3"><div>
+						<img src="authCodeAction" id="Verify" style="cursor: hand;"
+							alt="看不清，换一张" />
+					</div></td>
+			</tr>
+			<tr>
+				<td align="right">验证码：</td>
+				<td><input id="authCode" name="authCode"></td>
+
+				<td><div id="authCodeTip" style="width: 250px"></div></td>
+			</tr>
+		</table>
+		<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="button" id="button" value="注册" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+			type="reset" id="button" value="重置" />
+			</div>
+	</form>
 </body>
 </html>
