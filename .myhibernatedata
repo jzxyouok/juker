@@ -1,0 +1,24 @@
+#MyEclipse Hibernate Properties
+#Mon Sep 15 11:56:40 CST 2014
+sessionFactoryName=cn.juke.bean.HibernateSessionFactory
+genBasicCompId=true
+profile=
+daoSFId=
+version=3.3
+jndiPath=
+detectM2M=true
+reStrategyClass=
+detectO2O=true
+springDaoFile=
+useJavaTypes=false
+keyGenerator=native
+libInstallFolder=WebContent/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=true
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=true
+reSettingsFile=
+configFile=/jukerts/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true

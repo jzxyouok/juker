@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="default" extends="json-default">
+		<interceptors>
+			<!-- 定义权限控制拦截器 -->
+			<interceptor name="authority" class="cn.juke.util.AuthInterceptor" />
+			<!-- 定义一个包含权限控制的拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 定义默认拦截器 -->
+		<default-interceptor-ref name="mydefault" />
+		<!-- 定义全局处理结果 -->
+		<global-results>
+			<!-- 逻辑名为login的结果，映射到/login.jsp页面 -->
+			<result name="user_login">/admin/transfer.jsp</result>
+		</global-results>
+
+		<action name="house_*" class="cn.juke.admin.action.HouseAction"
+			method="{1}">
+			<result name="success">/admin/house_{1}.jsp</result>
+		</action>
+		<action name="house_detail" class="cn.juke.admin.action.HouseAction"
+			method="detail">
+			<result name="success">/admin/house_detail.jsp</result>
+			<result name="input">/admin/house_update.jsp</result>
+		</action>
+		<action name="house_add" class="cn.juke.admin.action.HouseAction"
+			method="add">
+			<result name="success">/admin/house_detail.jsp</result>
+		</action>
+		<action name="house_update" class="cn.juke.admin.action.HouseAction"
+			method="update">
+			<result name="success">/admin/house_detail.jsp</result>
+		</action>
+
+		<action name="broker_*" class="cn.juke.admin.action.BrokerAction"
+			method="{1}">
+			<result name="success">/admin/broker_list.jsp</result>
+		</action>
+
+		<action name="deal_*" class="cn.juke.admin.action.DealAction" method="{1}">
+			<result name="search">/admin/deal_list.jsp</result>
+			<result name="success">/admin/deal_nopay_list.jsp</result>
+		</action>
+
+		<action name="user_list" class="cn.juke.admin.action.UserAction"
+			method="list">
+			<result name="success">/admin/user_list.jsp</result>
+		</action>
+		<action name="user_login" class="cn.juke.admin.action.UserAction"
+			method="login">
+			<result name="success">/admin/index.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<action name="user_edit" class="cn.juke.admin.action.UserAction"
+			method="edit">
+			<result name="success">/admin/user_list.jsp</result>
+		</action>
+		
+		<action name="userActive" class="cn.juke.admin.action.UserAction"
+			method="update">
+			<result name="success">/admin/user_list.jsp</result>
+		</action>
+
+		<action name="customer_list" class="cn.juke.admin.action.CustomerAction"
+			method="list">
+			<result name="success">/admin/customer_list.jsp</result>
+		</action>
+		<action name="customer_stats" class="cn.juke.admin.action.CustomerAction"
+			method="stats">
+			<result name="success">/admin/customer_list.jsp</result>
+		</action>
+     
+        <action name="customer_update" class="cn.juke.admin.action.CustomerAction"
+			method="update">
+			<result name="success">/admin/customer_list.jsp</result>
+		</action>
+		<action name="authCodeAction" class="cn.juke.admin.action.SecurityCodeImageAction">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+
+		<action name="abc" class="cn.juke.admin.action.SignupAction">
+			<result name="success" type="json"></result>
+			<result name="ok">/admin/login.jsp</result>
+		</action>
+
+		<action name="treenode" class="cn.juke.admin.action.UserAction">
+			<result name="success">/admin/index.jsp</result>
+		</action>
+
+		<action name="customer_listByName" class="cn.juke.admin.action.CustomerAction"
+			method="byName">
+			<result name="success">/admin/customer_list.jsp</result>
+		</action>
+		
+	    <action name="cde" class="cn.juke.admin.action.UserAction" method="listRoles">
+			<result name="success">/admin/user_roles.jsp</result>
+		</action>
+		
+		 <action name="userRolesUpdate" class="cn.juke.admin.action.UserAction" method="updateRoles">
+			<result name="success">/admin/user_list.jsp</result>
+		</action>
+		
+		 <action name="role_list" class="cn.juke.admin.action.RoleAction" method="list">
+			<result name="success">/admin/role_list.jsp</result>
+		</action>
+		
+		<action name="role_edit" class="cn.juke.admin.action.RoleAction" method="edit">
+			<result name="success">/admin/role_treenode.jsp</result>
+		</action>
+		
+		 <action name="role_update" class="cn.juke.admin.action.RoleAction" method="update">
+			<result name="success">/admin/role_list.jsp</result>
+		</action>
+		
+		 <action name="role_add" class="cn.juke.admin.action.RoleAction" method="add">
+			<result name="success">/admin/role_list.jsp</result>
+		</action>
+		
+		 <action name="deals_update" class="cn.juke.admin.action.DealAction" method="edits">
+			<result name="success">/admin/deal_list.jsp</result>
+		</action>
+		
+		 <action name="brokers_update" class="cn.juke.admin.action.BrokerAction" method="edits">
+			<result name="success">/admin/broker_list.jsp</result>
+		</action>
+	</package>
+
+	<package name="p2" extends="struts-default">
+		<default-action-ref name="notFound" />
+		<action name="notFound">
+			<result>/admin/404.htm</result>
+		</action>
+	</package>
+</struts>
