@@ -79,7 +79,9 @@
                    <td class="td_center" ><input type="checkbox"  name="sdeals" id="sdeals" value="${d.id}"></td>
                    <td>${d.customer_name}</td>
                    <td>${d.house_name}</td>
-                   <td>${d.house_btype}</td>
+                   <td><s:select list="#{1:'一居',2:'两居',3:'三居',4:'四居',5:'别墅'}"    
+                        name="house_type" theme="simple"    
+                        value="#d.house_type"></s:select></td>
                    <td>${d.broker_name}</td>
                    <td>${d.dealtime}</td>
                    <td>${d.money}</td> 

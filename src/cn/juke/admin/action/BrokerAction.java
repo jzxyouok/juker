@@ -20,8 +20,17 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 	private Page page;
 	private Long bid;
 	private String username;
-    private Set<Integer> sbrokers=new HashSet<Integer>();
-	
+	private Set<Integer> sbrokers = new HashSet<Integer>();
+	private Integer crflag;
+
+	public Integer getCrflag() {
+		return crflag;
+	}
+
+	public void setCrflag(Integer crflag) {
+		this.crflag = crflag;
+	}
+
 	public Set<Integer> getSbrokers() {
 		return sbrokers;
 	}
@@ -70,25 +79,32 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 
 	public String list() {
 		System.out.println(page);
-		if (page == null){
+		if (page == null) {
 			page = new Page();
-			page.setPageIndex(1);}
+			page.setPageIndex(1);
+		}
 		Long comid = (Long) getSession().get("comid");
 		username = (String) getSession().get("username");
-	
-		if ("admin".equals(username)) {
-			brokers = bs.search( page);
-		} else
-			brokers = bs.search(page, comid);
+		if (crflag == null) {
+			if ("admin".equals(username)) {
+				brokers = bs.search(page);
+			} else
+				brokers = bs.search(page, comid);
+		} else {
+			if ("admin".equals(username)) {
+				brokers = bs.search(crflag,page);
+			} else
+				brokers = bs.search(page, comid,crflag);
+		}
 		return SUCCESS;
 	}
 
-	 public String delete(){
-	 broker=bs.getBroker(bid);
-	 broker.setState(0);
-	 bs.update(broker);
-	 return list();
-	 }
+	public String delete() {
+		broker = bs.getBroker(bid);
+		broker.setState(0);
+		bs.update(broker);
+		return list();
+	}
 
 	public Page getPage() {
 		return page;
@@ -100,9 +116,10 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 
 	public String listByName() {
 		String name;
-		try{
-		name= new String((broker.getName()).getBytes("ISO-8859-1"),"UTF-8"); 
-		}catch(Exception e){
+		try {
+			name = new String((broker.getName()).getBytes("ISO-8859-1"),
+					"UTF-8");
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		broker.setName(name);
@@ -111,18 +128,18 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 		Long comid = (Long) getSession().get("comid");
 		String username = (String) getSession().get("username");
 		page.setPageIndex(1);
-		if("admin".equals(username)) {
+		if ("admin".equals(username)) {
 			brokers = bs.search(name, page);
 		} else
 			brokers = bs.search(name, page, comid);
 		return SUCCESS;
 	}
-	
-	public String edits(){
-		Iterator<Integer> ii=sbrokers.iterator();
-		while(ii.hasNext()){
-			Integer i=ii.next();
-			Broker b=bs.getBroker(new Long(i));
+
+	public String edits() {
+		Iterator<Integer> ii = sbrokers.iterator();
+		while (ii.hasNext()) {
+			Integer i = ii.next();
+			Broker b = bs.getBroker(new Long(i));
 			b.setState(0);
 			bs.update(b);
 		}

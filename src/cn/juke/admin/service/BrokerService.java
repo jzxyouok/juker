@@ -22,4 +22,8 @@ public interface BrokerService {
 	public List<Broker> search(Page page);
 	
 	public List<Broker> search(String name,Page page);
+	
+    public List<Broker> search(Page page,Long comid,Integer crflag);
+	 
+	public List<Broker> search(Integer crflag,Page page);
 }

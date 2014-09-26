@@ -23,19 +23,70 @@ public class Deal implements java.io.Serializable {
 	private String house_name;
 	private String customer_name;
 	private String broker_name;
-	private String house_btype;
+	private Integer house_type;
+	private String house_type_name;
 	private Integer status;
 	private double money;
 	private double commision;
-	private String cstate;//支付状态
+	private String cstate;// 支付状态
 	private String dealtime;
 	private String comid;
 	private String dealer;
-	private String createtime;//经纪人推荐时间
-	
+	private String createtime;// 经纪人推荐时间
+	private String cstate_name;// 支付状态名字
+	private String status_name;// 状态名字
+
 	// Constructors
 
-	@Column(name="create_time")
+	@Transient
+	public String getCstate_name() {
+		return cstate_name;
+	}
+
+	public void setCstate_name(String cstate_name) {
+		this.cstate_name = cstate_name;
+	}
+
+	public void setCstate_name() {
+		if ("0".equals(cstate))
+			setCstate_name("未支付");
+		else if ("1".equals(cstate))
+			setCstate_name("已支付");
+	}
+
+	@Transient
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
+	}
+
+	public void setStatus_name() {
+		switch (status) {
+		case 0:
+			setStatus_name("待处理");
+			break;
+		case 1:
+			setStatus_name("无效");
+			break;
+		case 2:
+			setStatus_name("到访");
+			break;
+		case 3:
+			setStatus_name("意向");
+			break;
+		case 4:
+			setStatus_name("定金");
+			break;
+		case 5:
+			setStatus_name("成交");
+			break;
+		}
+	}
+
+	@Column(name = "create_time")
 	public String getCreatetime() {
 		return createtime;
 	}
@@ -63,7 +114,7 @@ public class Deal implements java.io.Serializable {
 	/** default constructor */
 	public Deal() {
 	}
-	
+
 	@Transient
 	public String getHouse_name() {
 		return house_name;
@@ -72,7 +123,7 @@ public class Deal implements java.io.Serializable {
 	public void setHouse_name(String house_name) {
 		this.house_name = house_name;
 	}
-    
+
 	@Transient
 	public String getCustomer_name() {
 		return customer_name;
@@ -81,7 +132,7 @@ public class Deal implements java.io.Serializable {
 	public void setCustomer_name(String customer_name) {
 		this.customer_name = customer_name;
 	}
-    
+
 	@Transient
 	public String getBroker_name() {
 		return broker_name;
@@ -91,23 +142,14 @@ public class Deal implements java.io.Serializable {
 		this.broker_name = broker_name;
 	}
 
-	@Transient
-	public String getHouse_btype() {
-		return house_btype;
-	}
-
-	public void setHouse_btype(String house_btype) {
-		this.house_btype = house_btype;
-	}
-
 	public Deal(Long id, String customer_name, String house_name,
-			String house_btype, String broker_name, String dealtime,
+			Integer house_type, String broker_name, String dealtime,
 			double money, double commision, String cstate) {
 		super();
 		this.id = id;
 		this.customer_name = customer_name;
 		this.house_name = house_name;
-		this.house_btype = house_btype;
+		this.house_type = house_type;
 		this.broker_name = broker_name;
 		this.dealtime = dealtime;
 		this.money = money;
@@ -135,7 +177,6 @@ public class Deal implements java.io.Serializable {
 		return this.id;
 	}
 
-
 	@Column(name = "house_id")
 	public Long getHouse_id() {
 		return this.house_id;
@@ -158,7 +199,6 @@ public class Deal implements java.io.Serializable {
 	public Long getCustomer_id() {
 		return this.customer_id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
@@ -212,4 +252,59 @@ public class Deal implements java.io.Serializable {
 		this.dealer = dealer;
 	}
 
+	public Integer getHouse_type() {
+		return house_type;
+	}
+
+	public void setHouse_type(Integer house_type) {
+		this.house_type = house_type;
+	}
+
+	@Transient
+	public String getHouse_type_name() {
+		return house_type_name;
+	}
+
+	public void setHouse_type_name(String house_type_name) {
+		this.house_type_name = house_type_name;
+	}
+
+	public void setHouse_type_name() {
+		switch (house_type) {
+		case 1:
+			setHouse_type_name("一居");
+			break;
+		case 2:
+			setHouse_type_name("两居");
+			break;
+		case 3:
+			setHouse_type_name("三居");
+			break;
+		case 4:
+			setHouse_type_name("四居");
+			break;
+		case 5:
+			setHouse_type_name("别墅");
+			break;
+		}
+	}
+
+	public Deal(Long broker_id, String broker_name, String house_name,
+			Integer house_type, String customer_name, Integer status,
+			double money, double commision, String createtime, String dealtime,
+			String cstate, String dealer) {
+		super();
+		this.broker_id = broker_id;
+		this.house_name = house_name;
+		this.customer_name = customer_name;
+		this.broker_name = broker_name;
+		this.house_type = house_type;
+		this.status = status;
+		this.money = money;
+		this.commision = commision;
+		this.cstate = cstate;
+		this.dealtime = dealtime;
+		this.dealer = dealer;
+		this.createtime = createtime;
+	}
 }

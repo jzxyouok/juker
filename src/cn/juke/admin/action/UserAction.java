@@ -217,7 +217,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		if(duser==null)
 			{this.addFieldError("user","用戶名或者密码不对！");
 		     return ;}
-		System.out.println("state的值为"+duser.getState());
 		if(!"1".equals(duser.getState())){
 			this.addFieldError("user","该用户还没有被激活！");
 		}

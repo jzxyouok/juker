@@ -22,5 +22,7 @@ public interface DealService {
 	public List<Deal> search(Page page, String state, Long comid);
 
 	public List<Deal> search(Long comid, Page page);
+	
+	public List<Deal> searchByBroker(Long broker_id,Page page);
 
 }

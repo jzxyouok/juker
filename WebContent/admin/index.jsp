@@ -115,7 +115,7 @@
 <option value="1" selected>经纪人</option>
 <option value="2">客戶</option>
 </select>
-<input type="text" id="stext" class="swap_value" /> 
+<input type="text" id="stext" style="width:30px height:20px" /> 
 <input type="image" src="http://files.jb51.net/demoimg/200912/btn_search_box.gif" width="27" height="24" id="go" alt="Search" title="Search" /> 
 		
 			<div id="photo_info" class="fr">

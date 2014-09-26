@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <link rel="stylesheet" href="css/common.css">
    <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="css/button.css">
    <script type="text/javascript" src="js/jquery.min.js"></script>
    <script type="text/javascript" src="js/colResizable-1.3.min.js"></script>
    <script type="text/javascript" src="js/common.js"></script>
@@ -54,6 +55,20 @@
     	  if($("#user").val()=="admin")
     		  $(obj).find("span").css("display","");
       }
+      
+      function ord(){
+    	  if($("#crflag").val()==undefined)
+    		  $("#crflag").val("1");
+    	  else if($("#crflag").val()=="1")
+    		  $("#crflag").val("2");
+    	  else  $("#crflag").val("1");
+    	  window.location.href="broker_list.action?page.pageIndex=1&crflag="+$("#crflag").val();  
+      }
+      
+      function detail(obj){
+    	  var bid=$(obj).parent().parent().children("td").eq(0).find("input").attr("value"); 
+    	  window.location.href="broker_deals.action?did="+bid+"&page.pageIndex=1";
+      }
    </script>
    <style type="text/css">
    td{ text-align:center;}
@@ -67,20 +82,20 @@
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
                    <th width="20"><input type="checkbox" name="all" id="all" />选择</th>
-                   <th width="40">姓名</th>
-                   <th width="60">手机</th>
+                   <th width="25">姓名</th>
+                   <th width="40">手机</th>
                    <th width="30">推荐数</th>
                    <th width="30">到访数</th>
                    <th width="30">成交数</th>
                    <th width="80">账号</th>
-                   <th width="50">注册时间</th>
-                   <th width="80">操作</th>
+                   <th width="60" ><input type="button" value="注册时间" class="white" onclick="ord()"/></th>
+                   <th width="50">操作</th>
                     </tr>
                     
                 <s:iterator value="brokers" id="b">
                 <tr class="tr">
                    <td class="td_center" ><input type="checkbox"  name="sbrokers" id="sbrokers" value="${b.id}"></td>
-                   <td>${b.name}</td>
+                   <td><input type=button onclick="detail(this)" class="white" value="${b.name}"></td>
                    <td>${b.phone}</td>
                    <td>${b.recNum}</td>
                    <td>${b.arvNum}</td>
@@ -120,6 +135,7 @@
 				</div>
 			</div>
 			<input type="hidden" name="user" id="user" value="${username}">
+			<input type="hidden" name="crflag" id="crflag" value="${crflag}">
 			</form>
         </div>
      </div>

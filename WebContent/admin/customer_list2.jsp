@@ -84,7 +84,7 @@
         <form action="customer_update.action" method="post" id="form2">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
-                   <th width="60">选择</th>
+         
                    <th>客户名称</th>
                    <th>客户电话</th>
                    <th>推荐经纪人</th>
@@ -93,12 +93,10 @@
                    <th>状态</th>
                    <th>推荐时间</th>
                    <th>客户负责人</th>
-                   <th>操作</th>
                 </tr>
            
               <s:iterator value="customers" id="h">
 				<tr class="tr">
-					<td class="td_center" ><input type="checkbox"  name="scustomers" id="scustomers" value="${h.id}"></td>
 					<td>${h.name}</td>
 					<td>${h.phone}</td>
 					<td>${h.broker_name}</td>
@@ -106,38 +104,7 @@
 					<td>${h.weixin}</td>
 					<td>${h.statusName}</td>
 					<td>${h.dealtime}</td>
-					<td><input style="width:100px;height:30px" value="${h.dealer}"/></td>
-					<td>
-					<s:if test="cstatus==0">
-					<a href="customer_stats.action?hid=${h.id}&to_status=1&page.pageIndex=${page.pageIndex}" target="right"><input
-							type="button" name="button" class="btn btn82 btn_add" value="转无效"></a>
-						&nbsp;&nbsp;
-					 <input type="button" name="button"
-						class="btn btn82 btn_add" onclick="check(this)" value="转意向">
-					</s:if>	
-					<s:elseif test="cstatus==1">
-						 <input type="button" name="button"
-						class="btn btn82 btn_add" onclick="check(this)" value="转意向">
-					</s:elseif>
-					<s:elseif test="cstatus==2">
-						<a href="customer_stats.action?hid=${h.id}&to_status=1&page.pageIndex=${page.pageIndex}" target="right"><input
-							type="button" name="button" class="btn btn82 btn_add" value="转无效"></a>
-						&nbsp;&nbsp;<a href="customer_stats.action?hid=${h.id}&to_status=3&page.pageIndex=${page.pageIndex}" target="right"> <input type="button" name="button"
-						class="btn btn82 btn_add" value="转到访"></a>
-					</s:elseif>
-					<s:elseif test="cstatus==3">
-						<a href="customer_stats.action?hid=${h.id}&to_status=1&page.pageIndex=${page.pageIndex}" target="right"><input
-							type="button" name="button" class="btn btn82 btn_add" value="转无效"></a>
-						&nbsp;&nbsp;<a href="customer_stats.action?hid=${h.id}&to_status=4&page.pageIndex=${page.pageIndex}" target="right"> <input type="button" name="button"
-						class="btn btn82 btn_add" value=转定金></a>
-					</s:elseif>
-					<s:elseif test="cstatus==4">
-						<a href="customer_stats.action?hid=${h.id}&to_status=1&page.pageIndex=${page.pageIndex}" target="right"><input
-							type="button" name="button" class="btn btn82 btn_add" value="转无效"></a>
-							<a href="customer_stats.action?hid=${h.id}&to_status=5&page.pageIndex=${page.pageIndex}" target="right"><input
-							type="button" name="button" class="btn btn82 btn_add" value="转成交"></a>
-					</s:elseif>
-					</td>
+					<td>${h.dealer}</td>
 				</tr>
 				</s:iterator>
               </table>

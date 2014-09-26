@@ -106,6 +106,9 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 			else
 				customers = hs.search(page,username,s);
 		}
+		if(s==-1){
+			return "ok";
+		}
 		return SUCCESS;
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="/struts-dojo-tags" prefix="sx"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
  <head>
@@ -29,6 +30,7 @@
    .pageContent{ background-color:#F7FFFE; height:100%; padding-top:20px;}
    </style>
    <title>Document</title>
+   <sx:head extraLocales="utf-8"/> 
  </head>
  <body>
     <div class="pageContent">
@@ -91,9 +93,11 @@
 				<dl id="title_div">
 					<dt>开盘时间：</dt>
 					<dd style="width: 1200px;">
-						${house.saleTime}
+						<sx:datetimepicker name="saleTime" displayFormat="yyyy-MM-dd" value="#house.saleTime" language="utf-8"></sx:datetimepicker>
 					</dd>
-				</dl><br>						
+				</dl><br>
+										<sx:datetimepicker name="saleTime" displayFormat="yyyy-MM-dd" value="#house.saleTime" language="utf-8"></sx:datetimepicker>
+										
 				<dl id="title_div">
 					<dt>楼盘简介：</dt>
 					<dd style="width: 1200px;">	

@@ -164,4 +164,77 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 		return brokers;
 	}
 	
+     public List<Broker> search(Page page,Long comid,Integer crflag){
+    	 String orderflag="";
+    	 if(crflag==1)
+    		 orderflag="asc";
+    	 else orderflag="desc";
+    	 List<Broker> brokers = new ArrayList<Broker>();
+
+  		Session session = HibernateUtils.getSession();
+  		
+  		String sql1="select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
+  				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b " +
+  				"on a.id = b.broker_id where a.state='1' and b.comid = "+comid+"  group by a.id ";
+  		
+  		page.setTotalCount(session.createSQLQuery(sql1).list().size());
+  		
+  		int first= (page.getPageIndex() - 1)* page.getPageSize();
+  		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
+  				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b " +
+  				"on a.id = b.broker_id where a.state='1' and b.comid = "+comid+"  group by a.id order by actime "+orderflag+ " limit "
+  				+ first  + " ," + page.getPageSize();
+
+  		System.out.println(sql);
+  		List list = session.createSQLQuery(sql).list();
+  		
+  		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+  			Object[] objects = (Object[]) iterator.next();
+  			brokers.add(new Broker(new Long(((BigInteger)objects[0]).intValue()), (String) objects[1],
+  					(String) objects[2], ((BigDecimal) objects[3]).intValue(),
+  					((BigDecimal) objects[4]).intValue(),
+  					((BigDecimal) objects[5]).intValue(),
+  					(String) objects[6],(String)objects[7])
+  );
+  		}
+  		HibernateUtils.closeSession(session);	 
+  		return brokers;
+     }
+	 
+	 public List<Broker> search(Integer crflag,Page page){
+		 String orderflag="";
+    	 if(crflag==1)
+    		 orderflag="asc";
+    	 else orderflag="desc";
+    	List<Broker> brokers = new ArrayList<Broker>();
+
+  		Session session = HibernateUtils.getSession();
+  		
+  		String sql1="select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
+  				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b " +
+  				"on a.id = b.broker_id where a.state='1'  group by a.id ";
+  		
+  		page.setTotalCount(session.createSQLQuery(sql1).list().size());
+  		
+  		int first= (page.getPageIndex() - 1)* page.getPageSize();
+  		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
+  				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b " +
+  				"on a.id = b.broker_id where a.state='1'  group by a.id order by actime "+orderflag+ " limit "
+  				+ first  + " ," + page.getPageSize();
+
+  		System.out.println(sql);
+  		List list = session.createSQLQuery(sql).list();
+  		
+  		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+  			Object[] objects = (Object[]) iterator.next();
+  			brokers.add(new Broker(new Long(((BigInteger)objects[0]).intValue()), (String) objects[1],
+  					(String) objects[2], ((BigDecimal) objects[3]).intValue(),
+  					((BigDecimal) objects[4]).intValue(),
+  					((BigDecimal) objects[5]).intValue(),
+  					(String) objects[6],(String)objects[7])
+  );
+  		}
+  		HibernateUtils.closeSession(session);	 
+  		return brokers;
+     }
 }

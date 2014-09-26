@@ -1,8 +1,11 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="/struts-dojo-tags" prefix="sx"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <s:head/>
+ <sx:head extraLocales="utf-8"/> 
    <link rel="stylesheet" href="css/common.css">
    <link rel="stylesheet" href="css/main.css">
    <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -25,6 +28,12 @@
     	  form2.submit();
       }
    </script>
+   <style type="text/css">
+   input[type="text"]{
+   height:25px;
+   width:70px;
+   }
+   </style>
    <title>Document</title>
  </head>
  <body onload="setup();preselect('广东省');promptinfo();">
@@ -123,7 +132,7 @@
                   </td>
                  </tr>
                  <tr>
-                  <td class="td_right">开盘日期：</td><td><input type="text" name="saleTime" class="input-text lh30" size="20"></td>
+                  <td class="td_right">开盘日期：</td><td><sx:datetimepicker name="saleTime" displayFormat="yyyy-MM-dd" value="today" language="utf-8"></sx:datetimepicker></td>
                 </tr>
                 <tr>
                   <td class="td_right">售楼地址：</td><td><input type="text" name="saleAdress" class="input-text lh30" size="20"></td>

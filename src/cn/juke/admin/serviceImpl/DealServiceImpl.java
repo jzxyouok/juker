@@ -32,20 +32,23 @@ public class DealServiceImpl implements DealService {
 		return dd.query(id);
 	}
 
-	
-	public List<Deal> search(Page page){
+	public List<Deal> search(Page page) {
 		return dd.search(page);
 	}
 
-	public List<Deal> search(Page page, String state){
+	public List<Deal> search(Page page, String state) {
 		return dd.search(page, state);
 	}
 
-	public List<Deal> search(Page page, String state, Long comid){
-		return dd.search(page, state,comid);
+	public List<Deal> search(Page page, String state, Long comid) {
+		return dd.search(page, state, comid);
 	}
 
-	public List<Deal> search(Long comid, Page page){
+	public List<Deal> search(Long comid, Page page) {
 		return dd.search(comid, page);
+	}
+
+	public List<Deal> searchByBroker(Long broker_id, Page page) {
+		return dd.searchByBroker(broker_id, page);
 	}
 }

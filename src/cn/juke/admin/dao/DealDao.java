@@ -15,4 +15,6 @@ public interface DealDao extends GenericDao<Deal>
 	 public List<Deal> search(Page page,String state,Long comid);
 
 	 public List<Deal> search(Long comid,Page page);
+	 
+	 public List<Deal> searchByBroker(Long brokder_id,Page page);
 }
