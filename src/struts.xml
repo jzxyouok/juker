@@ -45,7 +45,8 @@
 			<result name="success">/admin/broker_list.jsp</result>
 		</action>
 
-		<action name="deal_*" class="cn.juke.admin.action.DealAction" method="{1}">
+		<action name="deal_*" class="cn.juke.admin.action.DealAction"
+			method="{1}">
 			<result name="search">/admin/deal_list.jsp</result>
 			<result name="success">/admin/deal_nopay_list.jsp</result>
 		</action>
@@ -63,7 +64,7 @@
 			method="edit">
 			<result name="success">/admin/user_list.jsp</result>
 		</action>
-		
+
 		<action name="userActive" class="cn.juke.admin.action.UserAction"
 			method="update">
 			<result name="success">/admin/user_list.jsp</result>
@@ -78,8 +79,8 @@
 			method="stats">
 			<result name="success">/admin/customer_list.jsp</result>
 		</action>
-     
-        <action name="customer_update" class="cn.juke.admin.action.CustomerAction"
+
+		<action name="customer_update" class="cn.juke.admin.action.CustomerAction"
 			method="update">
 			<result name="success">/admin/customer_list.jsp</result>
 		</action>
@@ -104,53 +105,66 @@
 			method="byName">
 			<result name="success">/admin/customer_list.jsp</result>
 		</action>
-		
-	    <action name="cde" class="cn.juke.admin.action.UserAction" method="listRoles">
+
+		<action name="cde" class="cn.juke.admin.action.UserAction"
+			method="listRoles">
 			<result name="success">/admin/user_roles.jsp</result>
 		</action>
-		
-		 <action name="userRolesUpdate" class="cn.juke.admin.action.UserAction" method="updateRoles">
+
+		<action name="userRolesUpdate" class="cn.juke.admin.action.UserAction"
+			method="updateRoles">
 			<result name="success">/admin/user_list.jsp</result>
 		</action>
-		
-		 <action name="role_list" class="cn.juke.admin.action.RoleAction" method="list">
+
+		<action name="role_list" class="cn.juke.admin.action.RoleAction"
+			method="list">
 			<result name="success">/admin/role_list.jsp</result>
 		</action>
-		
-		<action name="role_edit" class="cn.juke.admin.action.RoleAction" method="edit">
+
+		<action name="role_edit" class="cn.juke.admin.action.RoleAction"
+			method="edit">
 			<result name="success">/admin/role_treenode.jsp</result>
+
 		</action>
-		
-		 <action name="role_update" class="cn.juke.admin.action.RoleAction" method="update">
+		<action name="role_update" class="cn.juke.admin.action.RoleAction"
+			method="update">
+			<result name="success">/admin/role_list.jsp</result>
+			<result name="input">/admin/role_treenode.jsp</result>
+		</action>
+
+		<action name="role_add" class="cn.juke.admin.action.RoleAction"
+			method="add">
 			<result name="success">/admin/role_list.jsp</result>
 		</action>
-		
-		 <action name="role_add" class="cn.juke.admin.action.RoleAction" method="add">
-			<result name="success">/admin/role_list.jsp</result>
-		</action>
-		
-		 <action name="deals_update" class="cn.juke.admin.action.DealAction" method="edits">
+
+		<action name="deals_update" class="cn.juke.admin.action.DealAction"
+			method="edits">
 			<result name="success">/admin/deal_list.jsp</result>
 		</action>
-		
-		 <action name="brokers_update" class="cn.juke.admin.action.BrokerAction" method="edits">
+
+		<action name="brokers_update" class="cn.juke.admin.action.BrokerAction"
+			method="edits">
 			<result name="success">/admin/broker_list.jsp</result>
 		</action>
-		
-		<action name="useradd" class="cn.juke.admin.action.UserAction" method="add">
+
+		<action name="useradd" class="cn.juke.admin.action.UserAction"
+			method="add">
 			<result name="success">/admin/user_add.jsp</result>
 			<result name="input">/admin/user_add.jsp</result>
 		</action>
-		
-		<action name="companyadd" class="cn.juke.admin.action.CompanyAction" method="add">
+
+		<action name="companyadd" class="cn.juke.admin.action.CompanyAction"
+			method="add">
 			<result name="success">/admin/company_add.jsp</result>
 			<result name="input">/admin/company_add.jsp</result>
 		</action>
-		<action name="companyget" class="cn.juke.admin.action.CompanyAction" method="get">
+		<action name="companyget" class="cn.juke.admin.action.CompanyAction"
+			method="get">
 			<result name="success" type="json"></result>
 		</action>
-		
-		<action name="broker_deals" class="cn.juke.admin.action.DealAction" method="detail">
+
+		<action name="broker_deals" class="cn.juke.admin.action.DealAction"
+			method="detail">
 			<result name="success">/admin/broker_deals.jsp</result>
 		</action>
 	</package>

@@ -56,18 +56,40 @@
     		  $(obj).find("span").css("display","");
       }
       
-      function ord(){
+      function ord(type){
     	  if($("#crflag").val()==undefined)
     		  $("#crflag").val("1");
     	  else if($("#crflag").val()=="1")
     		  $("#crflag").val("2");
     	  else  $("#crflag").val("1");
-    	  window.location.href="broker_list.action?page.pageIndex=1&crflag="+$("#crflag").val();  
+    	  window.location.href="broker_list.action?page.pageIndex=1&crflag="+$("#crflag").val()+"&type="+type;  
       }
       
       function detail(obj){
     	  var bid=$(obj).parent().parent().children("td").eq(0).find("input").attr("value"); 
     	  window.location.href="broker_deals.action?did="+bid+"&page.pageIndex=1";
+      }
+      
+      function ord(type){
+    	  if($("#crflag").val()==undefined)
+    		  $("#crflag").val("1");
+    	  else if($("#crflag").val()=="1")
+    		  $("#crflag").val("2");
+    	  else  $("#crflag").val("1");
+    	  window.location.href="broker_list.action?page.pageIndex=1&crflag="+$("#crflag").val()+"&type="+type;  
+      }
+      
+      function skip(v){
+    	  var page=parseInt($("#index").val());
+    	  if(v==1)
+    		  page=1;
+    	  else if(v==2)
+    		  page=page-1;
+    	  else if(v==3)
+    		  page=page+1;
+    	  else if(v==4)
+    		  page=$("#pageCount").val();
+    	  window.location.href="broker_list.action?page.pageIndex="+page+"&crflag="+$("#crflag").val()+"&type="+$("#type").val();
       }
    </script>
    <style type="text/css">
@@ -84,11 +106,11 @@
                    <th width="20"><input type="checkbox" name="all" id="all" />选择</th>
                    <th width="25">姓名</th>
                    <th width="40">手机</th>
-                   <th width="30">推荐数</th>
-                   <th width="30">到访数</th>
-                   <th width="30">成交数</th>
+                   <th width="30"><input type="button" value="推荐数" class="white" onclick="ord(2)"/></th>
+                   <th width="30"><input type="button" value="到访数" class="white" onclick="ord(3)"/></th>
+                   <th width="30"><input type="button" value="成交数" class="white" onclick="ord(4)"/></th>
                    <th width="80">账号</th>
-                   <th width="60" ><input type="button" value="注册时间" class="white" onclick="ord()"/></th>
+                   <th width="60" ><input type="button" value="注册时间" class="white" onclick="ord(1)"/></th>
                    <th width="50">操作</th>
                     </tr>
                     
@@ -123,19 +145,22 @@
 					<ul>
 					    <li class="first-child"><span>一共${page.pageCount}页</span></li>
 					    <li class="first-child"><span>当前第${page.pageIndex}页</span></li>
-						<li class="first-child"><a href="broker_list.action?page.pageIndex=1">首页</a></li>
+						<li class="first-child"><span><input class="blue"  type=button onclick="skip(1)" value="首页"></span></li>
 						<s:if test="page.hasPrevious">
-						<li class="first-child"><a href="broker_list.action?page.pageIndex=${page.pageIndex - 1}">上一页</a></span></li>
+						<li class="first-child"><span><input  class="blue" type=button onclick="skip(2)" value="上一页"></span></li>
 						</s:if>
 						<s:if test="page.hasNext">
-						<li class="first-child"><a href="broker_list.action?page.pageIndex=${page.pageIndex + 1}">下一页</a></span></li>
+						<li class="first-child"><span><input  class="blue" type=button onclick="skip(3)" value="下一页"></span></li>
 						</s:if>
-						<li class="first-child"><a href="broker_list.action?page.pageIndex=${page.pageCount}">末页</a></span></li>
+						<li class="first-child"><span><input  class="blue" type=button onclick="skip(4)" value="末页"></span></li>
 					</ul>			
 				</div>
 			</div>
 			<input type="hidden" name="user" id="user" value="${username}">
 			<input type="hidden" name="crflag" id="crflag" value="${crflag}">
+			<input type="hidden" name="type" id="type" value="${type}">
+			<input type="hidden" name="index" id="index" value="${page.pageIndex}">
+			<input type="hidden" name="pageCount" id="pageCount" value="${page.pageCount}">
 			</form>
         </div>
      </div>

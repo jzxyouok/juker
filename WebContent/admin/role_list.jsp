@@ -36,7 +36,7 @@ td {
 				<tr>
 					<th>角色</th>
 					<th>创建时间</th>
-					<th width="130">公司</th>
+					<th width="130">創建者</th>
 					<th width="130">描述</th>
 					<th>操作</th>
 				</tr>
@@ -44,7 +44,7 @@ td {
 				<tr class="tr">
 					<td>${h.name}</td>
 					<td>${h.create_time}</td>
-					<td>${h.comid}</td>
+					<td>${h.creature}</td>
 					<td>${h.descr}</td>
 					<td>
 					<a href="role_edit.action?rid=${h.id}" target="right"><input

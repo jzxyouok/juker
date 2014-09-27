@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    角色名:<s:property value="role.name"/>        <s:property  value="role.id"/>
+    角色名:<s:property value="role.name"/>        <font color=red><s:fielderror></s:fielderror></font>
 	<s:form action="role_update" method="post" name="myForm">
 		 <s:optiontransferselect label="选择要增加的菜单"  
               name="selectedNodes" leftTitle="已有菜单"  

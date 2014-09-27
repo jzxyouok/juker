@@ -112,7 +112,7 @@ public class DealAction extends BaseAction implements ModelDriven<Deal> {
 	}
 
 	public String update() {
-		System.out.println(did);
+//		System.out.println(did);
 		Deal d = ds.getDeal(did);
 		d.setCstate(deal.getCstate());
 		d.setCommision(deal.getCommision());

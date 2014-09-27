@@ -105,7 +105,7 @@ public class TreeNode  implements java.io.Serializable {
         return parent;  
     }  
   
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent", fetch = FetchType.EAGER)  
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent", fetch = FetchType.LAZY)  
     public Set<TreeNode> getChildren() {  
         return children;  
     }  

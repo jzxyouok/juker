@@ -69,17 +69,17 @@ td {
 							<li class="first-child"><span>一共${page.pageCount}页</span></li>
 							<li class="first-child"><span>当前第${page.pageIndex}页</span></li>
 							<li class="first-child"><a
-								href="broker_list.action?page.pageIndex=1">首页</a></li>
+								href="broker_deals.action?page.pageIndex=1&did=${did}">首页</a></li>
 							<s:if test="page.hasPrevious">
 								<li class="first-child"><a
-									href="broker_list.action?page.pageIndex=${page.pageIndex - 1}">上一页</a></span></li>
+									href="broker_deals.action?page.pageIndex=${page.pageIndex - 1}&did=${did}">上一页</a></span></li>
 							</s:if>
 							<s:if test="page.hasNext">
 								<li class="first-child"><a
-									href="broker_list.action?page.pageIndex=${page.pageIndex + 1}">下一页</a></span></li>
+									href="broker_deals.action?page.pageIndex=${page.pageIndex + 1}&did=${did}">下一页</a></span></li>
 							</s:if>
 							<li class="first-child"><a
-								href="broker_list.action?page.pageIndex=${page.pageCount}">末页</a></span></li>
+								href="broker_deals.action?page.pageIndex=${page.pageCount}&did=${did}">末页</a></span></li>
 						</ul>
 					</div>
 				</div>

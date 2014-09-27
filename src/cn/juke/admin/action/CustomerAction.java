@@ -115,7 +115,7 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 	public String stats() {
 		Deal dDeal = ds.getDeal(hid);
 		cstatus = dDeal.getStatus();
-		System.out.println("hid==" + hid + " dDeal==" + dDeal);
+//		System.out.println("hid==" + hid + " dDeal==" + dDeal);
 		if (to_status == 2)
 			dDeal.setDealer(der);
 		else if (to_status == 1)
@@ -148,7 +148,7 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 		while (ii.hasNext()) {
 			int i = ii.next();
 			Deal dd = ds.getDeal(new Long(i));
-			System.out.println(dd);
+//			System.out.println(dd);
 			cstatus = dd.getStatus();
 			dd.setStatus(to_status);
 			if (to_status == 1)

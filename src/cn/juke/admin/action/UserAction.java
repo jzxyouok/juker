@@ -138,10 +138,10 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
             session.put("userid",u.getId());
             session.put("comid",u.getCompany().getId());
            
-            if("admin".equals(u.getUsername())){
-            	root=tns.get(new Long(1));
-            }
-            else{
+//            if("admin".equals(u.getUsername())){
+//            	root=tns.get(new Long(1));
+//            }
+//            else{
             root=new TreeNode(1L,"root",null,null,null);
             Iterator<Role> ir=u.getRoles().iterator();
             Set<TreeNode> parents=new LinkedHashSet<TreeNode>();
@@ -174,7 +174,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
             		
             }
             root.setChildren(parents);
-            }
+//            }
 			return SUCCESS;
 	}
 	
@@ -245,7 +245,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		Long comid=(Long)getSession().get("comid");
 		String username=(String)getSession().get("username");
 		User u=hs.search(username);
-		System.out.println("user_list"+u+" comid "+comid);
 		if(page==null){
 			page=new Page();
 			page.setPageIndex(1);
@@ -254,8 +253,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		users = hs.search(page);
 		}
 		else users = hs.search(page,comid);
-	    System.out.println(users);
-	    System.out.println(u);
 		users.remove(u);
 		return SUCCESS;
 	}
@@ -268,10 +265,8 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 			page=new Page();
 			page.setPageIndex(1);
 		}
-		if("admin".equals(username)){
-			allRoles=new HashSet<Role>(rs.search(page));
-		}
-		else allRoles=new HashSet<Role>(u.getRoles());//管理员给用户分的角色
+		
+		allRoles=new HashSet<Role>(u.getRoles());//授權者擁有的角色
 		
 		user=hs.getUser(hid);
 		

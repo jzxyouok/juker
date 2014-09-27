@@ -22,6 +22,15 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 	private String username;
 	private Set<Integer> sbrokers = new HashSet<Integer>();
 	private Integer crflag;
+	private Integer type;
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 	public Integer getCrflag() {
 		return crflag;
@@ -78,7 +87,7 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 	}
 
 	public String list() {
-		System.out.println(page);
+//		System.out.println(page);
 		if (page == null) {
 			page = new Page();
 			page.setPageIndex(1);
@@ -92,9 +101,9 @@ public class BrokerAction extends BaseAction implements ModelDriven<Broker> {
 				brokers = bs.search(page, comid);
 		} else {
 			if ("admin".equals(username)) {
-				brokers = bs.search(crflag,page);
+				brokers = bs.search(crflag,page,type);
 			} else
-				brokers = bs.search(page, comid,crflag);
+				brokers = bs.search(page, comid,crflag,type);
 		}
 		return SUCCESS;
 	}

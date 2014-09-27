@@ -39,4 +39,8 @@ public class RoleServiceImpl implements RoleService {
 	public List<Role> search(Page page, Long comid) {
 		return hd.search(page, comid);
 	}
+	
+	public List<Role> search(Page page,String username ){
+		return hd.search(page, username);
+	}
 }

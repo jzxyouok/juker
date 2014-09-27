@@ -23,4 +23,8 @@ public class RoleDaoImpl extends GenericHibernateDao<Role> implements RoleDao
         return queryForList("select count(*) from Role r where r.comid = ?", "from Role r where  r.comid = ? ",new Object[]{comid}, page);
     }
     
+    public List<Role> search(Page page,String username )
+    {
+        return queryForList("select count(*) from Role r where r.username = ?", "from Role r where  r.username = ? ",new Object[]{username}, page);
+    }
 }

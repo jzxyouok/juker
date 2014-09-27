@@ -49,12 +49,12 @@ public class BrokerServiceImpl implements BrokerService {
 		return hd.search(name, page);
 	}
 
-	public List<Broker> search(Page page, Long comid, Integer crflag) {
-		return hd.search(page, comid, crflag);
+	public List<Broker> search(Page page, Long comid, Integer crflag,Integer type) {
+		return hd.search(page, comid, crflag, type);
 	}
 
-	public List<Broker> search(Integer crflag, Page page) {
-		return hd.search(crflag, page);
+	public List<Broker> search(Integer crflag, Page page,Integer type) {
+		return hd.search(crflag, page,type);
 	}
 
 }

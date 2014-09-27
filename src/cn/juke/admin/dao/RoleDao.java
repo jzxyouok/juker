@@ -11,4 +11,6 @@ public interface RoleDao extends GenericDao<Role>
 	 public List<Role> search(Page page);
 	 
 	 public List<Role> search(Page page,Long comid);
+	 
+	 public List<Role> search(Page page,String username);
 }

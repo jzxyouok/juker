@@ -21,11 +21,29 @@ public class Role {
 	
     private String name;
     
-    private Long comid;
+    private String rolename;
     
-    private String create_time;
+    public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+
+	private String create_time;
     
     private String descr;
+    
+    private String creature;
+
+	public String getCreature() {
+		return creature;
+	}
+
+	public void setCreature(String creature) {
+		this.creature = creature;
+	}
 
 	public String getCreate_time() {
 		return create_time;
@@ -52,11 +70,10 @@ public class Role {
 		return result;
 	}
 
-	public Role(Long id, String name, Long comid, String descr) {
+	public Role(Long id, String name, String descr) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.comid = comid;
 		this.descr = descr;
 	}
 
@@ -80,14 +97,6 @@ public class Role {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
-
-	public Long getComid() {
-		return comid;
-	}
-
-	public void setComid(Long comid) {
-		this.comid = comid;
 	}
 
 	@ManyToMany(fetch=FetchType.EAGER)

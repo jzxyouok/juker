@@ -146,7 +146,7 @@ public class HouseAction extends BaseAction implements ModelDriven<House> {
 			for (int i = 0; i < img.length; i++) {
 				String[] entireName = imgFileName[i].split("\\.");
 				String filename = entireName[0];
-				System.out.println(filename);
+//				System.out.println(filename);
 				File savefile = new File(savedir, filename + ".JPG");
 				pics[i] = filename;
 				picture.append(filename);
@@ -190,7 +190,7 @@ public class HouseAction extends BaseAction implements ModelDriven<House> {
 			for (int i = 0; i < img.length; i++) {
 				String[] entireName = imgFileName[i].split("\\.");
 				String filename = entireName[0];
-				System.out.println(filename);
+//				System.out.println(filename);
 				File savefile = new File(savedir, filename + ".JPG");
 				pics[i] = filename;
 				picture.append(filename);

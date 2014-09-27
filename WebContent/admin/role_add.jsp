@@ -36,17 +36,18 @@
               <form action="role_add.action" class="jqtransform" id="form2" method="post">
                <table class="form_table pt15 pb15" width="100%" border="0" cellpadding="0" cellspacing="0">
                  <tr>
-                  <td class="td_right">角色名字：</td>
+                  <td class="td_right">角色暱稱：</td>
                   <td class=""> 
-                    <input type="text" name="name" class="input-text lh30" size="40">
+                    <input type="text" name="rolename" class="input-text lh30" size="10">
                   </td>
                   </tr>
                   <tr>
-                  <td class="td_right">角色描述：</td><td><input type="text" name="descr" class="input-text lh30" size="40"></td>
+                  <td class="td_right">角色名字：</td><td><input type="text" name="name" class="input-text lh30" size="20"></td>
                 </tr>
-                <tr>
-                  <td class="td_right">公司代码（管理员有效）：</td><td><input type="text" name="comid" class="input-text lh30" size="10"></td>
+                  <tr>
+                  <td class="td_right">角色描述：</td><td><input type="text" name="descr" class="input-text lh30" size="30"></td>
                 </tr>
+                
                  <tr>
                    <td class="td_right">&nbsp;</td>
                    <td class="">

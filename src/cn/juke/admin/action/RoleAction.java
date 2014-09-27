@@ -1,6 +1,7 @@
 package cn.juke.admin.action;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -107,8 +108,7 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 
 	public String list() {
 		String username = (String) getSession().get("username");
-		System.out.println(getSession().get("comid"));
-		Long comid = (Long) getSession().get("comid");
+		User u = us.search(username);
 		if (page == null) {
 			page = new Page();
 			page.setPageIndex(1);
@@ -116,22 +116,27 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 		if ("admin".equals(username))
 			roles = rs.search(page);
 		else
-			roles = rs.search(page, comid);
+			roles = new ArrayList<Role>(u.getRoles());
 
-		System.out.println(roles);
+//		System.out.println(roles);
 		return "success";
 	}
 
 	public String update() {
-		Long comid = (Long) getSession().get("comid");
+		String username = (String) getSession().get("username");
+		User u = us.search(username);
 		role = rs.getRole(rid);
+		if(!role.getCreature().equals(username)){
+			addFieldError("role","你不是創建者，無法修改角色");
+			return INPUT;
+		}
 		Set<TreeNode> nodes = new LinkedHashSet<TreeNode>();
 		Iterator<Integer> t = selectedNodes.iterator();
 		while (t.hasNext()) {
 			Integer i = t.next();
 			TreeNode node = tns.get(new Long(i));
 			if (node.getParent().getParent().getId() == 1L) {
-				System.out.println(node);
+//				System.out.println(node);
 				nodes.add(node);
 			}
 		}
@@ -141,7 +146,7 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 			page = new Page();
 			page.setPageIndex(1);
 		}
-		roles = rs.search(page, comid);
+		roles = new ArrayList<Role>(u.getRoles());
 		return "success";
 	}
 
@@ -156,30 +161,30 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 
 		String username = (String) getSession().get("username");
 		User u = us.search(username);
-		if ("admin".equals(u.getUsername())) {
-			allNodes = new LinkedHashSet<TreeNode>(tns.search());
-			Iterator<TreeNode> ii = allNodes.iterator();
-			while (ii.hasNext()) {
-				TreeNode i=ii.next();
-				System.out.println(i);
-				if (i.getId()==1||i.getParent().getId() == 1)
-					ii.remove();
-			}
-		}
-		// 如果是管理员，获得所有菜单，否则只能分配自己有的菜单
-		else {
-			Iterator<Role> ir = u.getRoles().iterator();
-			while (ir.hasNext()) {
-				Role r = ir.next();
-				{
-					Iterator<TreeNode> nodes = r.getNodes().iterator();
-					while (nodes.hasNext()) {
-						TreeNode t = nodes.next();
-						allNodes.add(t);
-					}
+		// if ("admin".equals(u.getUsername())) {
+		// allNodes = new LinkedHashSet<TreeNode>(tns.search());
+		// Iterator<TreeNode> ii = allNodes.iterator();
+		// while (ii.hasNext()) {
+		// TreeNode i=ii.next();
+		// System.out.println(i);
+		// if (i.getId()==1||i.getParent().getId() == 1)
+		// ii.remove();
+		// }
+		// }
+		// // 如果是管理员，获得所有菜单，否则只能分配自己有的菜单
+		// else {
+		Iterator<Role> ir = u.getRoles().iterator();
+		while (ir.hasNext()) {
+			Role r = ir.next();
+			{
+				Iterator<TreeNode> nodes = r.getNodes().iterator();
+				while (nodes.hasNext()) {
+					TreeNode t = nodes.next();
+					allNodes.add(t);
 				}
 			}
 		}
+		// }
 
 		allNodes.removeAll(havedNodes);
 		return "success";
@@ -187,22 +192,28 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 
 	public String add() {
 		String username = (String) getSession().get("username");
-		Long comid = (Long) getSession().get("comid");
-		if (!comid.equals(role.getComid()) && !username.equals("admin")) {
-			role.setComid(comid);
-		}
+//		Long comid = (Long) getSession().get("comid");
+		User u = us.search(username);
 		role.setCreate_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
 				.format(new Date()));
+		role.setCreature(username);
 		rs.create(role);
+		u.getRoles().add(role);
+		us.update(u);
 
 		if (page == null) {
 			page = new Page();
 			page.setPageIndex(1);
 		}
+//		if ("admin".equals(username))
+//			roles = rs.search(page);
+//		else
+//			roles = rs.search(page, comid);
+		
 		if ("admin".equals(username))
 			roles = rs.search(page);
 		else
-			roles = rs.search(page, comid);
+			roles = new ArrayList<Role>(u.getRoles());
 
 		return "success";
 	}
