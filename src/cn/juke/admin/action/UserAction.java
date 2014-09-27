@@ -233,7 +233,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		Company c=cs.get(comid);
 		user.setCompany(c);
 		user.setState("1");
-		user.setModifyt_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+		user.setModify_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 		user.setCreate_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 		hs.create(user);
 		return SUCCESS;

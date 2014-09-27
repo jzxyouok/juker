@@ -34,7 +34,7 @@ public class User implements java.io.Serializable {
 	private Company company;
 	private String password;
 	private String create_time;
-	private String modifyt_time;
+	private String modify_time;
 	private String phone;
 	private String qq;
 	private String email;
@@ -55,12 +55,14 @@ public class User implements java.io.Serializable {
 		this.create_time = create_time;
 	}
 
-	public String getModifyt_time() {
-		return modifyt_time;
+
+
+	public String getModify_time() {
+		return modify_time;
 	}
 
-	public void setModifyt_time(String modifyt_time) {
-		this.modifyt_time = modifyt_time;
+	public void setModify_time(String modify_time) {
+		this.modify_time = modify_time;
 	}
 
 	@ManyToOne

@@ -21,10 +21,8 @@
 	<property name="hibernate.hbm2ddl.auto">update</property><!-- 包含多个文件时不会把其它冲掉 -->
 		<mapping class="cn.juke.bean.Broker" />
 		<mapping class="cn.juke.bean.Deal" />
-		<mapping class="cn.juke.bean.Household" />
 		<mapping class="cn.juke.bean.Customer" />
 		<mapping class="cn.juke.bean.House" />
-		<mapping class="cn.juke.bean.Commision" />
 		<mapping class="cn.juke.bean.User" />
 		<mapping class="cn.juke.bean.TreeNode" />
 		<mapping class="cn.juke.bean.Role" />

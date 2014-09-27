@@ -30,7 +30,7 @@ public class Deal implements java.io.Serializable {
 	private double commision;
 	private String cstate;// 支付状态
 	private String dealtime;
-	private String comid;
+	private Long comid;
 	private String dealer;
 	private String createtime;// 经纪人推荐时间
 	private String cstate_name;// 支付状态名字
@@ -95,11 +95,12 @@ public class Deal implements java.io.Serializable {
 		this.createtime = createtime;
 	}
 
-	public String getComid() {
+	
+	public Long getComid() {
 		return comid;
 	}
 
-	public void setComid(String comid) {
+	public void setComid(Long comid) {
 		this.comid = comid;
 	}
 

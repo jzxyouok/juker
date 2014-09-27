@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="t_treenode",catalog="juker")
+@Table(name="treenode",catalog="juker")
 public class TreeNode  implements java.io.Serializable {  
   
     
