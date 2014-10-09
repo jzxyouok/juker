@@ -42,7 +42,7 @@ public class TestDB {
 			h.setName(hnames[rand.nextInt(3)]);
 			h.setDescr("好地方");
 			h.setDeveloper(dnames[rand.nextInt(3)]);
-			h.setDiscount("昌平");
+			h.setDiscount(Math.random()+"");
 			h.setDtype("经济型");
 			h.setPrice(rand.nextInt(200));
 			h.setSaleAdress("fsdfsd" + i);
@@ -84,7 +84,7 @@ public class TestDB {
 			c.setAccount("account" + i);
 			c.setBank(i % 5 + "bank");
 			c.setPhone("PhoneNO" + i);
-			c.setState(rand.nextInt(1));
+			c.setState(rand.nextInt(2));
 			c.setCreatetime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 			c.setName(hnames[rand.nextInt(4)] + i);
 			c.setPhone("phoneNo" + i);
@@ -106,8 +106,8 @@ public class TestDB {
 			if(c.getStatus()>=2)
 				c.setDealer(unames[rand.nextInt(4)]);
 			c.setDealtime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-			c.setMoney(i+200);
-			c.setCommision(i+10);
+			c.setMoney(new Double(i+200));
+			c.setCommision(new Double(i+10));
 			c.setHouse_id(new Long(i));
 			c.setHouse_type(rand.nextInt(5)+1);
 		

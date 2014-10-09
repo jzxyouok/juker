@@ -109,13 +109,6 @@ td {
 				<div class="pagination">
 					<ul>
 						<li>&nbsp;&nbsp;&nbsp;</li>
-						<li><input type="button" 
-							class="btn btn82 btn_save2" value="激活" 
-							onClick="transfer(this.value)"></li>
-						<li>&nbsp;&nbsp;</li>
-						<li><input type="button" onClick="transfer(this.value)"
-							class="btn btn82 btn_del" value="冻结"></li>
-						<li>&nbsp;&nbsp;</li>
 						<li><input type="button" onClick="window.location.href='user_add.jsp'"
 							class="btn btn82 btn_del" value="新建"></li>	
 					 

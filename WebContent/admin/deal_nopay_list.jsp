@@ -50,7 +50,7 @@
   	    	}
   	    $("#dstate").val("0");
   	    $("#form2").submit();
-    }      
+      }
    </script>
    <style type="text/css">
    td{ text-align:center;}
@@ -60,7 +60,7 @@
  <body>
      <div id="table" class="mt10">
         <div class="box span10 oh">
-        <form action="deals_update.action" method="post" id="form2">
+        <form action="dedit.action" method="post" id="form2">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
                     <th width="60"><input type="checkbox" name="all" id="all" />选择</th>
@@ -80,7 +80,7 @@
                    <td>${d.customer_name}</td>
                    <td>${d.house_name}</td>
                    <td><s:select list="#{1:'一居',2:'两居',3:'三居',4:'四居',5:'别墅'}"    
-                        name="house_type" theme="simple"    
+                        theme="simple"    
                         value="#d.house_type"></s:select></td>
                    <td>${d.broker_name}</td>
                    <td>${d.dealtime}</td>
@@ -88,7 +88,7 @@
                    <td>${d.commision}</td>
                    <td>未支付</td>     
                     <td>
-                       <a href="deal_update.action?page.pageIndex=${page.pageIndex}&dstate=0&did=${d.id}"><input type="button" class="btn btn82 btn_del" value="支付"></a>
+                       <a href="deal_modify.action?page.pageIndex=${page.pageIndex}&dstate=0&did=${d.id}"><input type="button" class="btn btn82 btn_del" value="支付"></a>
                    </td>       
                  </tr>
                  </s:iterator>
@@ -108,18 +108,18 @@
 					<ul>
 					    <li class="first-child"><span>一共${page.pageCount}页</span></li>
 					    <li class="first-child"><span>当前第${page.pageIndex}页</span></li>
-						<li class="first-child"><a href="deal_list.action?page.pageIndex=1">首页</a></li>
+						<li class="first-child"><a href="deal_list.action?dstate=0&type=1&page.pageIndex=1">首页</a></li>
 						<s:if test="page.hasPrevious">
-						<li class="first-child"><a href="deal_list.action?page.pageIndex=${page.pageIndex - 1}">上一页</a></span></li>
+						<li class="first-child"><a href="deal_list.action?dstate=0&type=1&page.pageIndex=${page.pageIndex - 1}">上一页</a></span></li>
 						</s:if>
 						<s:if test="page.hasNext">
-						<li class="first-child"><a href="deal_list.action?page.pageIndex=${page.pageIndex + 1}">下一页</a></span></li>
+						<li class="first-child"><a href="deal_list.action?dstate=0&type=1&page.pageIndex=${page.pageIndex + 1}">下一页</a></span></li>
 						</s:if>
-						<li class="first-child"><a href="deal_list.action?page.pageIndex=${page.pageCount}">末页</a></span></li>
+						<li class="first-child"><a href="deal_list.action?dstate=0&type=1&page.pageIndex=${page.pageCount}">末页</a></span></li>
 					</ul>			
 				</div>
 			</div>
-			<input type="hidden" id="dstate" name="dstate">
+			<input type="hidden" name="dstate" value="0" id="dstate">
 			</form>
         </div>
      </div>

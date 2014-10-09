@@ -131,6 +131,7 @@
 					operateor : "=",
 					onError : "2次密码不一致,请确认"
 				});
+
 				$("#comId").formValidator({
 					onShow : "请选择你的所在公司",
 					onFocus : "公司必须选择",
@@ -140,6 +141,7 @@
 					min : 1,
 					onError : "公司必须选择"
 				});
+
 				$.ajax({
 					type : "GET",
 					contentType : "application/json",
@@ -148,15 +150,12 @@
 					dataType : 'json',
 					success : function(result) {
 						var data = eval(result.coms);
-						var select = $("#comId");
+						var select = $("#comId");						
 						$.each(data, function(index, obj) {
-							$(
-									"<option value=" + obj.id + ">" + obj.name
-											+ "</option>").appendTo(select);
+							$("<option value='" + obj.id + "'>" + obj.name+ "</option>").appendTo(select);
 						});
 					}
 				});
-
 			});
 
 	window.onload = function() {
@@ -240,9 +239,10 @@ body,div {
 			</tr>
 		</table>
 		<div>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="button" id="button" value="注册" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-			type="reset" id="button" value="重置" />
-			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="button"
+				id="button" value="注册" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+				type="reset" id="button" value="重置" />
+		</div>
 	</form>
 </body>
 </html>

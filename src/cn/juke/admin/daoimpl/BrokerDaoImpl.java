@@ -27,7 +27,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql1 = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and b.comid = "
+				+ "on a.id = b.broker_id where a.state=1 and a.comid = "
 				+ comid + " and a.name = '" + name + "' group by a.id ";
 
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
@@ -35,7 +35,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 		int first = (page.getPageIndex() - 1) * page.getPageSize();
 		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and b.comid = "
+				+ "on a.id = b.broker_id where a.state=1 and a.comid = "
 				+ comid
 				+ " and a.name = '"
 				+ name
@@ -66,7 +66,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql1 = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and b.comid = "
+				+ "on a.id = b.broker_id where a.state=1 and a.comid = "
 				+ comid + " group by a.id ";
 
 		int size = session.createSQLQuery(sql1).list().size();
@@ -76,7 +76,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and b.comid = "
+				+ "on a.id = b.broker_id where a.state=1 and a.comid = "
 				+ comid
 				+ " group by a.id limit "
 				+ first
@@ -108,7 +108,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql1 = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' group by a.id ";
+				+ "on a.id = b.broker_id where a.state=1 group by a.id ";
 
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
 
@@ -116,7 +116,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' group by a.id limit "
+				+ "on a.id = b.broker_id where a.state=1 group by a.id limit "
 				+ first + " ," + page.getPageSize();
 
 		System.out.println(sql);
@@ -144,7 +144,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql1 = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and a.name = '"
+				+ "on a.id = b.broker_id where a.state=1 and a.name = '"
 				+ name + "' group by a.id ";
 
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
@@ -153,7 +153,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and a.name = '"
+				+ "on a.id = b.broker_id where a.state=1 and a.name = '"
 				+ name
 				+ "' group by a.id limit "
 				+ first
@@ -207,7 +207,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql1 = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and b.comid = "
+				+ "on a.id = b.broker_id where a.state=1 and a.comid = "
 				+ comid + "  group by a.id ";
 
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
@@ -215,7 +215,7 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 		int first = (page.getPageIndex() - 1) * page.getPageSize();
 		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1' and b.comid = "
+				+ "on a.id = b.broker_id where a.state=1 and a.comid = "
 				+ comid
 				+ "  group by a.id order by "+t+" "
 				+ orderflag
@@ -265,14 +265,14 @@ public class BrokerDaoImpl extends GenericHibernateDao<Broker> implements
 
 		String sql1 = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1'  group by a.id ";
+				+ "on a.id = b.broker_id where a.state=1  group by a.id ";
 
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
 
 		int first = (page.getPageIndex() - 1) * page.getPageSize();
 		String sql = "select a.id as aid,a.phone as aphone,a.name as aname,sum(case when b.status >= 0 then 1 else 0 end) as recNum,sum(case when b.status > 2 then 1 else 0 end) as ariNum,"
 				+ "sum(case when b.status = 5 then 1 else 0 end) as dealNum,a.account as bcount ,a.create_time as actime from broker a left join deal b "
-				+ "on a.id = b.broker_id where a.state='1'  group by a.id order by "+t+" "
+				+ "on a.id = b.broker_id where a.state=1  group by a.id order by "+t+" "
 				+ orderflag + " limit " + first + " ," + page.getPageSize();
 
 		System.out.println(sql);

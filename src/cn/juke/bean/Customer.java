@@ -29,8 +29,17 @@ public class Customer implements java.io.Serializable {
 	private String dealtime;
 	private String dealer;
 	private String statusName;
+	private Long brokeids;
 
 	// Constructors
+
+	public Long getBrokeids() {
+		return brokeids;
+	}
+
+	public void setBrokeids(Long brokeids) {
+		this.brokeids = brokeids;
+	}
 
 	@Transient
 	public String getComid() {

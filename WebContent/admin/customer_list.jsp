@@ -10,7 +10,7 @@
 <script type="text/javascript" src="js/colResizable-1.3.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
    
-   <script type="text/javascript">
+   <script type="text/javascript" charset="utf-8">
       $(function(){  
         $(".list_table").colResizable({
           liveDrag:true,

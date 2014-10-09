@@ -101,10 +101,11 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 		if ("admin".equals(username)) {
 			customers = hs.search(page, s);
 		} else {
-			 if (s < 2)
-				customers = hs.search(page, s);
-			else
-				customers = hs.search(page,username,s);
+//			 if (s < 2)
+//				customers = hs.search(page, s);
+//			else
+//				customers = hs.search(page,username,s);
+			customers=hs.search(page, s, comid);
 		}
 		if(s==-1){
 			return "ok";
@@ -112,8 +113,10 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer> 
 		return SUCCESS;
 	}
 
-	public String stats() {
+	public String stats()throws Exception {
 		Deal dDeal = ds.getDeal(hid);
+		if(der!=null)
+		der = new String(der.getBytes("ISO-8859-1"),"UTF-8");
 		cstatus = dDeal.getStatus();
 //		System.out.println("hid==" + hid + " dDeal==" + dDeal);
 		if (to_status == 2)

@@ -26,8 +26,8 @@ public class Deal implements java.io.Serializable {
 	private Integer house_type;
 	private String house_type_name;
 	private Integer status;
-	private double money;
-	private double commision;
+	private Double money;
+	private Double commision;
 	private String cstate;// 支付状态
 	private String dealtime;
 	private Long comid;
@@ -210,20 +210,20 @@ public class Deal implements java.io.Serializable {
 	}
 
 	@Column(name = "money", precision = 30, scale = 0)
-	public double getMoney() {
+	public Double getMoney() {
 		return this.money;
 	}
 
-	public void setMoney(double money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 
 	@Column(name = "commision", precision = 30, scale = 0)
-	public double getCommision() {
+	public Double getCommision() {
 		return this.commision;
 	}
 
-	public void setCommision(double commision) {
+	public void setCommision(Double commision) {
 		this.commision = commision;
 	}
 

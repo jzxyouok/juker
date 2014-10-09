@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
- <s:head/>
  <sx:head extraLocales="utf-8"/> 
    <link rel="stylesheet" href="css/common.css">
    <link rel="stylesheet" href="css/main.css">
@@ -28,12 +27,7 @@
     	  form2.submit();
       }
    </script>
-   <style type="text/css">
-   input[type="text"]{
-   height:25px;
-   width:70px;
-   }
-   </style>
+   
    <title>Document</title>
  </head>
  <body onload="setup();preselect('广东省');promptinfo();">

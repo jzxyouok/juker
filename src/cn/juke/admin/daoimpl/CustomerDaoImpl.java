@@ -28,7 +28,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 		String sql1 = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 				"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 				"  from deal a,customer b,broker c,house d " +
-				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = "+customerName+" and a.comid = "+comid;
+				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = '"+customerName+"' and a.comid = "+comid;
 		
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
 		
@@ -37,7 +37,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 		String sql = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 				"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 				"  from deal a,customer b,broker c,house d " +
-				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = "+customerName+" and a.comid = "+comid+" limit "+first+","+page.getPageSize();
+				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = '"+customerName+"' and a.comid = "+comid+" limit "+first+","+page.getPageSize();
 		System.out.println(sql);
 
  		List list = session.createSQLQuery(sql).list();
@@ -156,7 +156,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 		String sql1 ="select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 				"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +
 				"  from deal a,customer b,broker c,house d " +
-				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = "+customerName+"";
+				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = '"+customerName+"'";
 		
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
 		
@@ -165,7 +165,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 		String sql = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 				"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 				"  from deal a,customer b,broker c,house d " +
-				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = "+customerName+" limit "+first+","+page.getPageSize();
+				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and b.name = '"+customerName+"' limit "+first+","+page.getPageSize();
 		System.out.println(sql);
 
  		List list = session.createSQLQuery(sql).list();
@@ -248,7 +248,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 		String sql1 = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 				"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 				"  from deal a,customer b,broker c,house d " +
-				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id  and a.dealer = "+dealer+"and a.status = "+status;
+				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id  and a.dealer = '"+dealer+"' and a.status = "+status;
 		
 		page.setTotalCount(session.createSQLQuery(sql1).list().size());
 		
@@ -257,7 +257,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 		String sql = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 				"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 				"  from deal a,customer b,broker c,house d " +
-				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and a.dealer = "+dealer+"and a.status = "+status+" limit "+first+","+page.getPageSize();
+				" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and a.dealer = '"+dealer+"' and a.status = "+status+" limit "+first+","+page.getPageSize();
 		System.out.println(sql);
 
  		List list = session.createSQLQuery(sql).list();
@@ -284,7 +284,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 			String sql1 = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 					"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 					"  from deal a,customer b,broker c,house d " +
-					" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id  and (a.dealer = "+dealer+" or a.status < 2)";
+					" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id  and (a.dealer = '"+dealer+"' or a.status < 2)";
 			
 			page.setTotalCount(session.createSQLQuery(sql1).list().size());
 			
@@ -293,7 +293,7 @@ public class CustomerDaoImpl extends GenericHibernateDao<Customer> implements Cu
 			String sql = "select a.id as bid,b.name as bname,b.phone as bphone,b.weixin as bweixin,b.qq as bqq," +
 					"a.status ,d.name as dname,c.name as cname,a.create_time as actime,a.dealer as dealer " +			
 					"  from deal a,customer b,broker c,house d " +
-					" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and (a.dealer = "+dealer+" or a.status < 2) limit "+first+","+page.getPageSize();
+					" where a.customer_id = b.id and a.broker_id=c.id and a.house_id = d.id and (a.dealer = '"+dealer+"' or a.status < 2) limit "+first+","+page.getPageSize();
 			System.out.println(sql);
 
 	 		List list = session.createSQLQuery(sql).list();

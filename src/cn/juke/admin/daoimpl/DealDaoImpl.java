@@ -77,7 +77,7 @@ public class DealDaoImpl extends GenericHibernateDao<Deal> implements DealDao {
 					(Integer) objects[3], (String) objects[4],
 					(String) objects[5], (Double) objects[6],
 					(Double) objects[7], (String) objects[8]);
-			System.out.println(db);
+		
 			db.setHouse_type_name();
 			deals.add(db);
 		}
@@ -118,7 +118,6 @@ public class DealDaoImpl extends GenericHibernateDao<Deal> implements DealDao {
 					(Integer) objects[3], (String) objects[4],
 					(String) objects[5], (Double) objects[6],
 					(Double) objects[7], (String) objects[8]);
-			System.out.println(db);
 			db.setHouse_type_name();
 			deals.add(db);
 		}
@@ -154,7 +153,7 @@ public class DealDaoImpl extends GenericHibernateDao<Deal> implements DealDao {
 					(Integer) objects[3], (String) objects[4],
 					(String) objects[5], (Double) objects[6],
 					(Double) objects[7], (String) objects[8]);
-			System.out.println(db);
+		
 			db.setHouse_type_name();
 			deals.add(db);
 		}
@@ -195,7 +194,6 @@ public class DealDaoImpl extends GenericHibernateDao<Deal> implements DealDao {
 			db.setHouse_type_name();
 			db.setStatus_name();
 			db.setCstate_name();
-			System.out.println(db);
 			
 			deals.add(db);
 		}

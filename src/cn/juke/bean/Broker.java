@@ -28,8 +28,16 @@ public class Broker implements java.io.Serializable {
 	private String bankname;
 	private String password;
 	private String createtime;//注册时间
+	private String comid;
+	
+	public String getComid() {
+		return comid;
+	}
 
-   
+	public void setComid(String comid) {
+		this.comid = comid;
+	}
+
 	public String getBankname() {
 		return bankname;
 	}

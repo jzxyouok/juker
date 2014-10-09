@@ -50,6 +50,21 @@
 			<result name="search">/admin/deal_list.jsp</result>
 			<result name="success">/admin/deal_nopay_list.jsp</result>
 		</action>
+		
+		<action name="deallistAll" class="cn.juke.admin.action.DealAction"
+			method="listAll">
+			<result name="success">/admin/deal_list_all.jsp</result>
+		</action>
+		
+		<action name="dedit" class="cn.juke.admin.action.DealAction"
+			method="edit">
+			<result name="success">/admin/deal_nopay_list.jsp</result>
+		</action>
+
+       <action name="deal_modify" class="cn.juke.admin.action.DealAction"
+			method="modify">
+			<result name="success">/admin/deal_nopay_list.jsp</result>
+		</action>
 
 		<action name="user_list" class="cn.juke.admin.action.UserAction"
 			method="list">
@@ -166,6 +181,11 @@
 		<action name="broker_deals" class="cn.juke.admin.action.DealAction"
 			method="detail">
 			<result name="success">/admin/broker_deals.jsp</result>
+		</action>
+		
+		<action name="cde" class="cn.juke.admin.action.CompanyAction"
+			method="list">
+			<result name="success">/admin/company_list.jsp</result>
 		</action>
 	</package>
 

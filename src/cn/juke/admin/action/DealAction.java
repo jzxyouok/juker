@@ -106,8 +106,11 @@ public class DealAction extends BaseAction implements ModelDriven<Deal> {
 				deals = ds.search(page, dstate, comid);
 		}
 		if (type == 0)
+			{
+			
 			return "search";
-
+			
+			}
 		return "success";
 	}
 
@@ -141,7 +144,7 @@ public class DealAction extends BaseAction implements ModelDriven<Deal> {
 		return SUCCESS;
 	}
 
-	public String edits() {
+	public String edit() {
 		Iterator<Integer> ii = sdeals.iterator();
 		while (ii.hasNext()) {
 			Deal d = ds.getDeal(new Long(ii.next()));
@@ -168,6 +171,55 @@ public class DealAction extends BaseAction implements ModelDriven<Deal> {
 			page.setPageIndex(1);
 		}
 		deals = ds.searchByBroker(did, page);
+		return "success";
+	}
+	
+	public String modify(){
+		
+		Deal d = ds.getDeal(did);
+		d.setCstate("1");
+		ds.update(d);
+
+		System.out.println("DState=="+dstate);
+		Long comid = (Long) getSession().get("comid");
+		String username = (String) getSession().get("username");
+		if (page == null) {
+			page = new Page();
+			page.setPageIndex(1);
+		}
+		if ("admin".equals(username)) {
+			if (dstate == null)
+				deals = ds.search(page);
+			else
+				deals = ds.search(page, dstate);
+		} else {
+			if (dstate == null)
+				deals = ds.search(comid, page);
+			else
+				deals = ds.search(page, dstate, comid);
+		}
+		return SUCCESS;
+	}
+	
+	public String listAll() {
+		Long comid = (Long) getSession().get("comid");
+		String username = (String) getSession().get("username");
+
+		if (page == null) {
+			page = new Page();
+			page.setPageIndex(1);
+		}
+		if ("admin".equals(username)) {
+			if (dstate == null)
+				deals = ds.search(page);
+			else
+				deals = ds.search(page, dstate);
+		} else {
+			if (dstate == null)
+				deals = ds.search(comid, page);
+			else
+				deals = ds.search(page, dstate, comid);
+		}
 		return "success";
 	}
 }
