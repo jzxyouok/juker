@@ -1,7 +1,7 @@
 package cn.juke.bean;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="treenode",catalog="juker")
-public class TreeNode  implements java.io.Serializable {  
+public class TreeNode  implements java.io.Serializable,Comparable<TreeNode> {  
   
     
     private Long id;  
@@ -28,7 +28,7 @@ public class TreeNode  implements java.io.Serializable {
     
     private String url;
     
-    private Set<TreeNode> children = new LinkedHashSet<TreeNode>();  
+    private Set<TreeNode> children = new TreeSet<TreeNode>();  
     
     public String getUrl() {
 		return url;
@@ -135,5 +135,13 @@ public class TreeNode  implements java.io.Serializable {
 		this.parent = parent;
 		this.url = url;
 		this.children = children;
+	}
+
+
+	@Override
+	public int compareTo(TreeNode o) {
+		return (int)(this.id-o.getId());
 	}  
+	
+
 }  

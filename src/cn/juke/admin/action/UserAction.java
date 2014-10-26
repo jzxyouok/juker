@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import cn.juke.admin.service.CompanyService;
 import cn.juke.admin.service.RoleService;
@@ -34,8 +35,8 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private RoleService rs=new RoleServiceImpl();
 	private List<User> users;
 	private Page page;
-	private Set<Role> rrs =new HashSet<Role>();
-	private Set<Role> allRoles=new HashSet<Role>();
+	private Set<Role> rrs =new LinkedHashSet<Role>();
+	private Set<Role> allRoles=new LinkedHashSet<Role>();
     private List<Integer> selectedRoles=new ArrayList<Integer>();
     private Set<Integer> susers=new HashSet<Integer>();
     private CompanyService cs=new CompanyServiceImpl();
@@ -144,8 +145,8 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 //            else{
             root=new TreeNode(1L,"root",null,null,null);
             Iterator<Role> ir=u.getRoles().iterator();
-            Set<TreeNode> parents=new LinkedHashSet<TreeNode>();
-            Set<TreeNode> children=new LinkedHashSet<TreeNode>();
+            Set<TreeNode> parents=new TreeSet<TreeNode>();
+            Set<TreeNode> children=new TreeSet<TreeNode>();
             while(ir.hasNext()){
             	Role r=ir.next();
             	{
@@ -154,7 +155,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
             			TreeNode t=nodes.next();
             			children.add(t);
             			TreeNode p=t.getParent();
-            			p.setChildren(new LinkedHashSet<TreeNode>());
+            			p.setChildren(new TreeSet<TreeNode>());
             			parents.add(p);
             		}          
             	}

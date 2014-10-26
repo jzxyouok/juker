@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import cn.juke.admin.service.RoleService;
 import cn.juke.admin.service.TreeNodeService;
@@ -37,11 +37,11 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 
 	private TreeNodeService tns = new TreeNodeServiceImpl();
 
-	private Set<TreeNode> havedNodes = new LinkedHashSet<TreeNode>();
+	private Set<TreeNode> havedNodes = new TreeSet<TreeNode>();
 
-	private Set<TreeNode> allNodes = new LinkedHashSet<TreeNode>();
+	private Set<TreeNode> allNodes = new TreeSet<TreeNode>();
 
-	private Set<Integer> selectedNodes = new LinkedHashSet<Integer>();
+	private Set<Integer> selectedNodes = new TreeSet<Integer>();
 
 	public Set<Integer> getSelectedNodes() {
 		return selectedNodes;
@@ -130,7 +130,7 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 			addFieldError("role","你不是創建者，無法修改角色");
 			return INPUT;
 		}
-		Set<TreeNode> nodes = new LinkedHashSet<TreeNode>();
+		Set<TreeNode> nodes = new TreeSet<TreeNode>();
 		Iterator<Integer> t = selectedNodes.iterator();
 		while (t.hasNext()) {
 			Integer i = t.next();
@@ -157,12 +157,12 @@ public class RoleAction extends BaseAction implements ModelDriven<Role> {
 		}
 		role = rs.getRole(rid);
 
-		havedNodes = new LinkedHashSet<TreeNode>(role.getNodes());
+		havedNodes = new TreeSet<TreeNode>(role.getNodes());
 
 		String username = (String) getSession().get("username");
 		User u = us.search(username);
 		// if ("admin".equals(u.getUsername())) {
-		// allNodes = new LinkedHashSet<TreeNode>(tns.search());
+		// allNodes = new TreeSet<TreeNode>(tns.search());
 		// Iterator<TreeNode> ii = allNodes.iterator();
 		// while (ii.hasNext()) {
 		// TreeNode i=ii.next();
